@@ -6,7 +6,7 @@
 - [ ] Conectar API real do IBGE ou banco de UFs e Cidades
 - [ ] Arquitetura para login/cadastro de empresas
 - [ ] Formulário de reivindicação/correção
-- [ ] Páginas individuais de empresas e categorias
+- [x] Páginas individuais de empresas e categorias
 - [ ] Integração Google Places API para listagens confiáveis (com cache e conformidade)
 - [ ] Vercel deploy com CI/CD
 - [ ] SEO, schema.org local business, sitemap dinâmico

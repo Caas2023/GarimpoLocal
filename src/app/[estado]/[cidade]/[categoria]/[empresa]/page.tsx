@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 interface LocalidadeProps {
@@ -24,7 +25,7 @@ export default async function EmpresaPage({ params }: LocalidadeProps) {
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Breadcrumb based on the architecture requirement */}
         <nav className="text-sm text-gray-500 flex space-x-2">
-          <a href="/" className="hover:text-blue-600">Início</a>
+          <Link href="/">Início</Link>
           <span>/</span>
           <span className="uppercase">{estado}</span>
           <span>/</span>
