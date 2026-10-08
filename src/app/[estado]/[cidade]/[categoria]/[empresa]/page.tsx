@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
 interface LocalidadeProps {
   params: Promise<{
@@ -12,6 +13,24 @@ interface LocalidadeProps {
 
 export const instant = false;
 
+// Generate dynamic SEO metadata
+export async function generateMetadata({ params }: LocalidadeProps): Promise<Metadata> {
+  const { estado, cidade, categoria, empresa } = await params;
+  const name = empresa.replace(/-/g, ' ');
+  const cityName = cidade.replace(/-/g, ' ');
+  const catName = categoria.replace(/-/g, ' ');
+
+  return {
+    title: `${name} - ${catName} em ${cityName}, ${estado.toUpperCase()}`,
+    description: `Encontre informações, telefone e endereço de ${name}, especialista em ${catName} localizado em ${cityName}, ${estado.toUpperCase()}.`,
+    openGraph: {
+      title: `${name} | Guarulhos Aberta`,
+      description: `Informações de ${name} em ${cityName}, ${estado.toUpperCase()}.`,
+      type: 'website',
+    }
+  };
+}
+
 export default async function EmpresaPage({ params }: LocalidadeProps) {
   const { estado, cidade, categoria, empresa } = await params;
   
@@ -20,25 +39,50 @@ export default async function EmpresaPage({ params }: LocalidadeProps) {
     notFound();
   }
 
+  const name = empresa.replace(/-/g, ' ');
+  const cityName = cidade.replace(/-/g, ' ');
+  const catName = categoria.replace(/-/g, ' ');
+
+  // Schema.org LocalBusiness
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: name,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Av. Exemplo Principal, 1000',
+      addressLocality: cityName,
+      addressRegion: estado.toUpperCase(),
+      addressCountry: 'BR'
+    },
+    telephone: '+5511900000000',
+    url: `https://guarulhosaberta.com.br/${estado}/${cidade}/${categoria}/${empresa}`
+  };
+
   return (
     <main className="min-h-screen bg-[#FFFFF0] p-8 font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Breadcrumb based on the architecture requirement */}
-        <nav className="text-sm text-gray-500 flex space-x-2">
-          <Link href="/">Início</Link>
+        <nav className="text-sm text-gray-500 flex space-x-2" aria-label="Breadcrumb">
+          <Link href="/" className="hover:underline text-[#005f73]">Início</Link>
           <span>/</span>
-          <span className="uppercase">{estado}</span>
+          <span className="uppercase text-[#005f73]">{estado}</span>
           <span>/</span>
-          <span className="capitalize">{cidade.replace(/-/g, ' ')}</span>
+          <span className="capitalize text-[#005f73]">{cityName}</span>
           <span>/</span>
-          <span className="capitalize">{categoria.replace(/-/g, ' ')}</span>
+          <span className="capitalize text-[#005f73]">{catName}</span>
         </nav>
 
         {/* Company Header */}
         <header className="bg-white rounded-lg shadow-sm p-8 border border-gray-100">
           <div className="flex items-center justify-between border-b pb-6 mb-6">
             <h1 className="text-3xl font-bold text-gray-900 capitalize" style={{ color: '#005f73' }}>
-              {empresa.replace(/-/g, ' ')}
+              {name}
             </h1>
             <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium tracking-wide">
               MOCK/VERIFICADO
@@ -47,11 +91,11 @@ export default async function EmpresaPage({ params }: LocalidadeProps) {
           
           <div className="space-y-4 text-gray-600">
             <p className="flex items-center">
-              <span className="material-icons mr-2 text-orange-500">📍</span>
-              Av. Exemplo Principal, 1000 - {cidade.replace(/-/g, ' ')}, {estado.toUpperCase()}
+              <span className="mr-2" style={{ color: '#f77f00' }}>📍</span>
+              Av. Exemplo Principal, 1000 - {cityName}, {estado.toUpperCase()}
             </p>
             <p className="flex items-center">
-              <span className="material-icons mr-2 text-orange-500">📞</span>
+              <span className="mr-2" style={{ color: '#f77f00' }}>📞</span>
               (11) 90000-0000
             </p>
           </div>
@@ -63,7 +107,7 @@ export default async function EmpresaPage({ params }: LocalidadeProps) {
             <h2 className="text-xl font-semibold mb-4 text-gray-800">Sobre nós</h2>
             <p className="text-gray-600 leading-relaxed">
               *Nota explicativa:* Sistema estruturado no padrão definido de escala nacional. 
-              Cidade acessada: {cidade}.
+              Cidade acessada: {cityName}.
               Esta página atende às diretrizes do diretório (fundo marfim, azul-petróleo, laranja-tangerina).
             </p>
           </div>

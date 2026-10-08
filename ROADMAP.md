@@ -9,4 +9,4 @@
 - [x] Páginas individuais de empresas e categorias
 - [ ] Integração Google Places API para listagens confiáveis (com cache e conformidade)
 - [ ] Vercel deploy com CI/CD
-- [ ] SEO, schema.org local business, sitemap dinâmico
+- [x] SEO, schema.org local business, sitemap dinâmico

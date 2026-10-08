@@ -24,4 +24,5 @@ npm run dev
 ## Progresso Atual (Cron)
 - Adicionados os layouts base para as páginas de **Cidade (`[estado]/[cidade]`)** e **Listagem de Categoria (`[estado]/[cidade]/[categoria]`)**.
 - Resolvidos os problemas de lint e adequadamente configurados para serem páginas baseadas em server-rendering/PPR.
+- **Implementados:** `sitemap.ts`, `robots.ts`, Metadados dinâmicos e `JSON-LD Schema.org LocalBusiness` na página da empresa. Estrutura otimizada para SEO de cauda longa a nível nacional.
 - Próximo passo sugerido: **Conectar API real do IBGE ou banco de UFs e Cidades / Integração Google Places API**.
