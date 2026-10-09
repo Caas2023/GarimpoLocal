@@ -89,15 +89,24 @@ export default async function EmpresaPage({ params }: LocalidadeProps) {
             </span>
           </div>
           
-          <div className="space-y-4 text-gray-600">
-            <p className="flex items-center">
-              <span className="mr-2" style={{ color: '#f77f00' }}>📍</span>
-              Av. Exemplo Principal, 1000 - {cityName}, {estado.toUpperCase()}
-            </p>
-            <p className="flex items-center">
-              <span className="mr-2" style={{ color: '#f77f00' }}>📞</span>
-              (11) 90000-0000
-            </p>
+          <div className="flex flex-col md:flex-row md:justify-between items-start md:items-end gap-4">
+            <div className="space-y-4 text-gray-600">
+              <p className="flex items-center">
+                <span className="mr-2" style={{ color: '#f77f00' }}>📍</span>
+                Av. Exemplo Principal, 1000 - {cityName}, {estado.toUpperCase()}
+              </p>
+              <p className="flex items-center">
+                <span className="mr-2" style={{ color: '#f77f00' }}>📞</span>
+                (11) 90000-0000
+              </p>
+            </div>
+            
+            <Link
+              href={`/${estado}/${cidade}/${categoria}/${empresa}/correcao`}
+              className="inline-flex items-center text-[#f77f00] hover:text-orange-600 font-medium text-sm border border-[#f77f00] hover:border-orange-600 rounded-md px-4 py-2 transition-colors"
+            >
+              ✎ Sugerir Correção / Reivindicar
+            </Link>
           </div>
         </header>
 

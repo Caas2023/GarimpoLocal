@@ -5,7 +5,7 @@
 - [x] Modelo nacional de localidade estruturado em pastas (App Router `/estado/cidade/categoria/empresa`)
 - [x] Conectar API real do IBGE ou banco de UFs e Cidades
 - [ ] Arquitetura para login/cadastro de empresas
-- [ ] Formulário de reivindicação/correção
+- [x] Formulário de reivindicação/correção
 - [x] Páginas individuais de empresas e categorias
 - [ ] Integração Google Places API para listagens confiáveis (com cache e conformidade)
 - [ ] Vercel deploy com CI/CD
