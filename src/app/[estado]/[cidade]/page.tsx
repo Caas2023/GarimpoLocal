@@ -57,9 +57,25 @@ export default async function CidadePage({ params }: CidadeProps) {
               Explore empresas e serviços em {formatCidade}, {estado.toUpperCase()}.
             </p>
           </div>
-          <p className="text-sm font-medium text-gray-500 mb-2">
-            Base nacional piloto local
-          </p>
+          <div className="flex flex-col items-end gap-2">
+            <p className="text-sm font-medium text-gray-500">
+              Base nacional piloto local
+            </p>
+            <div className="flex items-center gap-3 mt-2">
+              <Link 
+                href={`/${estado}/${cidade}/empresas/login`}
+                className="text-[#005f73] border border-[#005f73] px-4 py-2 rounded-md text-sm font-semibold hover:bg-teal-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#005f73]"
+              >
+                Login
+              </Link>
+              <Link 
+                href={`/${estado}/${cidade}/empresas/cadastro`}
+                className="bg-[#f77f00] text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-orange-600 transition-colors focus:outline-none focus:ring-2 focus:ring-[#f77f00]"
+              >
+                Cadastrar Empresa
+              </Link>
+            </div>
+          </div>
         </header>
 
         {/* Categories Grid */}
