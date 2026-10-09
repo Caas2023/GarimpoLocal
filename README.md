@@ -11,7 +11,7 @@ Diretório local confiável, rápido e útil para moradores e empresas. Este pro
 
 ## Status do Projeto
 
-- **Modelo Nacional**: 🟢 Roteamento Base estruturado
+- **Modelo Nacional**: 🟢 Roteamento Base estruturado, Mock IBGE (UFs/Cidades) configurado
 - **Vercel/GitHub Deploy**: 🔴 Não configurado (Aguardando autenticação git remota/vercel-cli)
 - **Places API**: 🔴 Pendente `GOOGLE_MAPS_API_KEY` (usando mock por enquanto)
 
