@@ -11,9 +11,10 @@ Diretório local confiável, rápido e útil para moradores e empresas. Este pro
 
 ## Status do Projeto
 
+- **Persistência Vercel**: 🟢 Drizzle ORM gerado com esquema IBGE e tabelas de Empresas/Claims/Localidades via `@neondatabase/serverless`.
 - **Modelo Nacional**: 🟢 Roteamento Base estruturado, Mock IBGE (UFs/Cidades) configurado
 - **Arquitetura Login/Cadastro**: 🟢 Módulos de autenticação implementados por tenant (`[estado]/[cidade]/empresas/...`) com design system
-- **Vercel/GitHub Deploy**: 🔴 Não configurado (Aguardando autenticação git remota/vercel-cli)
+- **Vercel/GitHub Deploy**: 🔴 Pendente linkagem do projeto
 - **Places API**: 🔴 Pendente `GOOGLE_MAPS_API_KEY` (usando mock por enquanto)
 
 ## Setup Local
@@ -28,4 +29,5 @@ npm run dev
 - **Implementados:** `sitemap.ts`, `robots.ts`, Metadados dinâmicos e `JSON-LD Schema.org LocalBusiness` na página da empresa. Estrutura otimizada para SEO de cauda longa a nível nacional.
 - **Formulário de Reivindicação/Correção:** Criada rota dinâmica `/correcao` aninhada com Server Actions e client state (`useActionState`) para gerenciamento de solicitações e ownership, acompanhando a direção de design (botões ação laranja, feedback visual).
 - **Arquitetura de Login/Cadastro:** Criadas as páginas `/empresas/cadastro` e `/empresas/login` com Server Actions, tratamento de erros via `useActionState` e estilo consistente com o diretório de design. Os forms seguem o escopo de namespace geográfico `/[estado]/[cidade]`.
-- Próximo passo sugerido: **Integração Google Places API** para auto-completar dados garantindo verificabilidade.
+- **Persistência de Dados (Vercel)**: Configurado Drizzle ORM com as tabelas de Empresas, Cidades, Categorias, Claims e Usuários, e inicializado migrações `drizzle-kit`.
+- Próximo passo sugerido: **Acessibilidade e Testes** utilizando Playwright ou Cypress.
