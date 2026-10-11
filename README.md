@@ -1,33 +1,14 @@
-# Guarulhos Aberta (Portal Diretório Nacional)
+# Diretório Nacional de Dados Abertos (Piloto: Guarulhos)
 
-Diretório local confiável, rápido e útil para moradores e empresas. Este produto está sendo validado com Guarulhos como cidade-piloto, mas com arquitetura dimensionada para as mais de 5.570 cidades brasileiras.
+Portal de dados abertos municipais para diretórios empresariais, desenvolvido com arquitetura nacional escalável (piloto em Guarulhos).
 
-## Regras de Arquitetura
+- **Princípio Nacional**: Estrutura escalável para ~5.570 cidades usando IDs IBGE e rotas dinâmicas.
+- **Tecnologia**: Next.js, TypeScript, Tailwind.
+- **Status**: Fase 1 — Escala e Piloto.
+- **Testes**: Unitários (Jest) implementados para lib `ibge` e schema local.
 
-- **Roteamento Global**: `/estado/cidade/categoria/empresa`
-- Todas as entidades estão vinculadas pelo ID do IBGE (estados e cidades).
-- Não há limite no modelo (Guarulhos não é hardcoded).
-- Tecnologias: Next.js (App Router), Tailwind CSS.
-
-## Status do Projeto
-
-- **Persistência Vercel**: 🟢 Drizzle ORM gerado com esquema IBGE e tabelas de Empresas/Claims/Localidades via `@neondatabase/serverless`.
-- **Modelo Nacional**: 🟢 Roteamento Base estruturado, Mock IBGE (UFs/Cidades) configurado
-- **Arquitetura Login/Cadastro**: 🟢 Módulos de autenticação implementados por tenant (`[estado]/[cidade]/empresas/...`) com design system
-- **Vercel/GitHub Deploy**: 🔴 Pendente linkagem do projeto
-- **Places API**: 🔴 Pendente `GOOGLE_MAPS_API_KEY` (usando mock por enquanto)
-
-## Setup Local
-
-```bash
-npm install
-npm run dev
-```
-## Progresso Atual (Cron)
-- Adicionados os layouts base para as páginas de **Cidade (`[estado]/[cidade]`)** e **Listagem de Categoria (`[estado]/[cidade]/[categoria]`)**.
-- Resolvidos os problemas de lint e adequadamente configurados para serem páginas baseadas em server-rendering/PPR.
-- **Implementados:** `sitemap.ts`, `robots.ts`, Metadados dinâmicos e `JSON-LD Schema.org LocalBusiness` na página da empresa. Estrutura otimizada para SEO de cauda longa a nível nacional.
-- **Formulário de Reivindicação/Correção:** Criada rota dinâmica `/correcao` aninhada com Server Actions e client state (`useActionState`) para gerenciamento de solicitações e ownership, acompanhando a direção de design (botões ação laranja, feedback visual).
-- **Arquitetura de Login/Cadastro:** Criadas as páginas `/empresas/cadastro` e `/empresas/login` com Server Actions, tratamento de erros via `useActionState` e estilo consistente com o diretório de design. Os forms seguem o escopo de namespace geográfico `/[estado]/[cidade]`.
-- **Persistência de Dados (Vercel)**: Configurado Drizzle ORM com as tabelas de Empresas, Cidades, Categorias, Claims e Usuários, e inicializado migrações `drizzle-kit`.
-- Próximo passo sugerido: **Acessibilidade e Testes** utilizando Playwright ou Cypress.
+## Roadmap (Atualizado em 2026-10-11)
+- [x] Criação da estrutura base
+- [x] Testes unitários para lógica de localidade (lib IBGE)
+- [ ] Testes E2E (Playwright)
+- [ ] Deploy Vercel (CI/CD)
