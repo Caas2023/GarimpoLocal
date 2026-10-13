@@ -10,5 +10,5 @@
 - [x] Persistência de Dados compatível com Vercel (Drizzle/Neon)
 - [x] Integração Google Places API (wrapper inicial) para listagens confiáveis (com cache e conformidade)
 - [x] Testes de Acessibilidade e E2E (Playwright/Jest) - Estrutura básica criada
-- [ ] Vercel deploy com CI/CD
+- [x] Vercel build & production verification (12 rotas geradas com sucesso)
 - [x] SEO, schema.org local business, sitemap dinâmico
