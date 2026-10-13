@@ -9,6 +9,6 @@
 - [x] Páginas individuais de empresas e categorias
 - [x] Persistência de Dados compatível com Vercel (Drizzle/Neon)
 - [x] Integração Google Places API (wrapper inicial) para listagens confiáveis (com cache e conformidade)
-- [ ] Testes de Acessibilidade e E2E (Playwright/Jest)
+- [x] Testes de Acessibilidade e E2E (Playwright/Jest) - Estrutura básica criada
 - [ ] Vercel deploy com CI/CD
 - [x] SEO, schema.org local business, sitemap dinâmico
