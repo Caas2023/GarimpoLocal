@@ -1,107 +1,64 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getCityBySlug, formatCidadeNome } from '@/lib/ibge';
+import { getCategorySummary } from '@/lib/catalog';
 
 interface CidadeProps {
-  params: Promise<{
-    estado: string;
-    cidade: string;
-  }>;
-}
-
-// Mock categories generator
-function getMockCategories() {
-  return [
-    { id: 'alimentacao', label: 'Alimentação', icon: '🍽️', count: 124 },
-    { id: 'beleza', label: 'Beleza & Estética', icon: '💇‍♀️', count: 85 },
-    { id: 'veiculos', label: 'Veículos', icon: '🚗', count: 56 },
-    { id: 'saude', label: 'Saúde', icon: '⚕️', count: 92 },
-    { id: 'tecnologia', label: 'Tecnologia', icon: '💻', count: 34 },
-    { id: 'construcao', label: 'Construção', icon: '🏗️', count: 71 },
-  ];
+  params: Promise<{ estado: string; cidade: string }>;
 }
 
 export const instant = false;
 
 export default async function CidadePage({ params }: CidadeProps) {
   const { estado, cidade } = await params;
-  
-  if (estado.length !== 2) {
-    notFound();
-  }
+  const city = await getCityBySlug(estado, cidade);
+  if (!city) notFound();
 
-  const categories = getMockCategories();
-  const formatCidade = cidade.replace(/-/g, ' ');
+  const cityName = formatCidadeNome(cidade, city);
+  const categories = getCategorySummary(String(city.id));
+  const totalCompanies = categories.reduce((sum, category) => sum + category.count, 0);
 
   return (
-    <main className="min-h-screen bg-[#FFFFF0] p-4 md:p-8 font-sans text-gray-800">
-      <div className="max-w-5xl mx-auto space-y-8">
-        
-        {/* Nav Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="text-sm text-gray-500 flex space-x-2">
-          <Link href="/" className="hover:text-[#005f73] transition-colors focus:outline-none focus:ring-2 focus:ring-[#f77f00] rounded">
-            Início
-          </Link>
+    <main className="min-h-screen bg-[#FFFFF0] p-4 font-sans text-gray-800 md:p-8">
+      <div className="mx-auto max-w-5xl space-y-8">
+        <nav aria-label="Breadcrumb" className="flex space-x-2 text-sm text-gray-500">
+          <Link href="/" className="rounded hover:text-[#005f73] focus:outline-none focus:ring-2 focus:ring-[#f77f00]">Início</Link>
           <span aria-hidden="true">/</span>
           <span className="uppercase">{estado}</span>
           <span aria-hidden="true">/</span>
-          <span className="capitalize font-medium text-gray-700">{formatCidade}</span>
+          <span className="font-medium text-gray-700">{cityName}</span>
         </nav>
 
-        {/* Page Header */}
-        <header className="border-b border-[#005f73]/20 pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <header className="flex flex-col justify-between gap-4 border-b border-[#005f73]/20 pb-5 md:flex-row md:items-end">
           <div>
-            <h1 className="text-3xl md:text-5xl font-bold capitalize text-[#005f73]">
-              {formatCidade}
-            </h1>
-            <p className="mt-2 text-gray-600 text-lg">
-              Explore empresas e serviços em {formatCidade}, {estado.toUpperCase()}.
-            </p>
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#f77f00]">Diretório local verificável</p>
+            <h1 className="text-3xl font-bold text-[#005f73] md:text-5xl">Empresas em {cityName}</h1>
+            <p className="mt-2 max-w-2xl text-gray-600">Explore {totalCompanies.toLocaleString('pt-BR')} registros com origem OpenStreetMap e cobertura limitada ao que foi mapeado.</p>
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <p className="text-sm font-medium text-gray-500">
-              Base nacional piloto local
-            </p>
-            <div className="flex items-center gap-3 mt-2">
-              <Link 
-                href={`/${estado}/${cidade}/empresas/login`}
-                className="text-[#005f73] border border-[#005f73] px-4 py-2 rounded-md text-sm font-semibold hover:bg-teal-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#005f73]"
-              >
-                Login
-              </Link>
-              <Link 
-                href={`/${estado}/${cidade}/empresas/cadastro`}
-                className="bg-[#f77f00] text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-orange-600 transition-colors focus:outline-none focus:ring-2 focus:ring-[#f77f00]"
-              >
-                Cadastrar Empresa
-              </Link>
-            </div>
+          <div className="flex gap-3">
+            <Link href={`/${estado}/${cidade}/empresas/login`} className="rounded-md border border-[#005f73] px-4 py-2 text-sm font-semibold text-[#005f73] hover:bg-teal-50 focus:outline-none focus:ring-2 focus:ring-[#005f73]">Login</Link>
+            <Link href={`/${estado}/${cidade}/empresas/cadastro`} className="rounded-md bg-[#f77f00] px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-[#f77f00]">Cadastrar empresa</Link>
           </div>
         </header>
 
-        {/* Categories Grid */}
-        <section>
-          <h2 className="text-2xl font-bold text-[#005f73] mb-6">Explore por Categorias</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {categories.map((cat) => (
-              <Link 
-                key={cat.id}
-                href={`/${estado}/${cidade}/${cat.id}`}
-                className="group bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#f77f00]"
-              >
-                <div className="flex flex-col items-center text-center space-y-3">
-                  <span className="text-4xl" aria-hidden="true">{cat.icon}</span>
-                  <div>
-                    <h3 className="font-bold text-gray-800 group-hover:text-[#005f73] transition-colors">
-                      {cat.label}
-                    </h3>
-                    <p className="text-sm text-gray-500">{cat.count} listings</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
+        <section aria-labelledby="categories-heading">
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <h2 id="categories-heading" className="text-2xl font-bold text-[#005f73]">Explore por categoria</h2>
+            <span className="text-sm text-gray-500">{categories.length} categorias catalogadas</span>
           </div>
+          {categories.length === 0 ? (
+            <p className="rounded-lg border border-dashed border-gray-300 bg-white p-6 text-gray-600">Ainda não há empresas catalogadas nesta localidade.</p>
+          ) : (
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {categories.map((category) => (
+                <Link key={category.slug} href={`/${estado}/${cidade}/${category.slug}`} className="group rounded-lg border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#f77f00]">
+                  <h3 className="font-bold text-gray-800 group-hover:text-[#005f73]">{category.label}</h3>
+                  <p className="mt-2 text-sm text-gray-500">{category.count.toLocaleString('pt-BR')} registros</p>
+                </Link>
+              ))}
+            </div>
+          )}
         </section>
-
       </div>
     </main>
   );

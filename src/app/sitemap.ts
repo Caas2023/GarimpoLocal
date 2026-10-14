@@ -1,32 +1,22 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
+import { getStates, getCitiesByState } from '@/lib/ibge';
+import { getCategorySummary } from '@/lib/catalog';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://guarulhosaberta.com.br';
+const baseUrl = 'https://guarulhosaberta.com.br';
 
-  // Nota: Em escala nacional (5.570 cidades, centenas de milhares de empresas), 
-  // será necessário usar "generateSitemaps" (função do Next.js 13+) 
-  // para dividir o sitemap (por exemplo, um sitemap de estados, cidades, e chuncks de 50.000 URLs).
-  // Abaixo está a base estática do piloto de Guarulhos:
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const states = await getStates();
+  const cities = (await Promise.all(states.map((state) => getCitiesByState(state.sigla)))).flat();
+  const cityUrls = cities.flatMap((city) => {
+    const state = states.find((item) => item.id === city.estado_id);
+    if (!state) return [];
+    const cityPath = `/${state.sigla.toLowerCase()}/${city.nome}`;
+    const categories = getCategorySummary(String(city.id));
+    return [
+      { url: `${baseUrl}${cityPath}`, changeFrequency: 'daily' as const, priority: 0.8 },
+      ...categories.map((category) => ({ url: `${baseUrl}${cityPath}/${category.slug}`, changeFrequency: 'daily' as const, priority: 0.7 })),
+    ];
+  });
 
-  return [
-    {
-      url: `${baseUrl}/`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/sp/guarulhos`,
-      lastModified: new Date(),
-      changeFrequency: 'hourly',
-      priority: 0.9,
-    },
-    // Exemplo de uma categoria em destaque para o piloto
-    {
-      url: `${baseUrl}/sp/guarulhos/restaurantes`,
-      lastModified: new Date(),
-      changeFrequency: 'hourly',
-      priority: 0.8,
-    }
-  ];
+  return [{ url: `${baseUrl}/`, changeFrequency: 'daily', priority: 1 }, ...cityUrls];
 }

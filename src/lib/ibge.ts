@@ -56,7 +56,7 @@ const states: State[] = [
  */
 const cities: City[] = [
   // SP
-  { id: 3518803, nome: 'guarulhos',     nomeExibicao: 'Guarulhos',     estado_id: 35 },
+  { id: 3518800, nome: 'guarulhos',     nomeExibicao: 'Guarulhos',     estado_id: 35 },
   { id: 3550308, nome: 'sao-paulo',     nomeExibicao: 'São Paulo',     estado_id: 35 },
   { id: 3509502, nome: 'campinas',      nomeExibicao: 'Campinas',      estado_id: 35 },
   // RJ

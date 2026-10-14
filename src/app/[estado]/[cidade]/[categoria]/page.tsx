@@ -1,126 +1,62 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { getCityBySlug, formatCidadeNome } from '@/lib/ibge';
+import { getCompaniesByCategory } from '@/lib/catalog';
 
 interface CategoriaProps {
-  params: Promise<{
-    estado: string;
-    cidade: string;
-    categoria: string;
-  }>;
-}
-
-// Mock data generator for layout representation (until API connects)
-function getMockCompanies(cidade: string, categoria: string) {
-  return Array.from({ length: 6 }).map((_, i) => ({
-    id: `empresa-${i + 1}`,
-    name: `Empresa Exemplo ${i + 1} de ${categoria.replace(/-/g, ' ')}`,
-    slug: `empresa-exemplo-${i + 1}`,
-    address: `Rua Exemplo ${i + 1}, Centro - ${cidade.replace(/-/g, ' ')}`,
-    phone: `(11) 90000-000${i}`,
-    status: i % 3 === 0 ? 'Fechado' : 'Aberto',
-    verified: i % 2 === 0,
-  }));
+  params: Promise<{ estado: string; cidade: string; categoria: string }>;
 }
 
 export const instant = false;
 
+export async function generateMetadata({ params }: CategoriaProps): Promise<Metadata> {
+  const { estado, cidade, categoria } = await params;
+  const city = await getCityBySlug(estado, cidade);
+  const cityName = formatCidadeNome(cidade, city);
+  const categoryName = categoria.replace(/-/g, ' ');
+  return {
+    title: `${categoryName} em ${cityName}`,
+    description: `Empresas de ${categoryName} em ${cityName}, ${estado.toUpperCase()}, com fonte e cobertura informadas.`,
+  };
+}
+
 export default async function CategoriaPage({ params }: CategoriaProps) {
   const { estado, cidade, categoria } = await params;
-  
-  if (estado.length !== 2) {
-    notFound();
-  }
+  const city = await getCityBySlug(estado, cidade);
+  if (!city) notFound();
 
-  const companies = getMockCompanies(cidade, categoria);
+  const cityName = formatCidadeNome(cidade, city);
+  const companies = getCompaniesByCategory(String(city.id), categoria);
+  if (companies.length === 0) notFound();
+  const categoryName = companies[0].category_label;
 
   return (
-    <main className="min-h-screen bg-[#FFFFF0] p-4 md:p-8 font-sans text-gray-800">
-      <div className="max-w-5xl mx-auto space-y-8">
-        
-        {/* Nav Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="text-sm text-gray-500 flex space-x-2">
-          <Link href="/" className="hover:text-[#005f73] transition-colors focus:outline-none focus:ring-2 focus:ring-[#f77f00] rounded">
-            Início
-          </Link>
-          <span aria-hidden="true">/</span>
-          <span className="uppercase">{estado}</span>
-          <span aria-hidden="true">/</span>
-          <span className="capitalize">{cidade.replace(/-/g, ' ')}</span>
-          <span aria-hidden="true">/</span>
-          <span className="capitalize font-medium text-gray-700">{categoria.replace(/-/g, ' ')}</span>
+    <main className="min-h-screen bg-[#FFFFF0] p-4 font-sans text-gray-800 md:p-8">
+      <div className="mx-auto max-w-5xl space-y-8">
+        <nav aria-label="Breadcrumb" className="flex flex-wrap gap-2 text-sm text-gray-500">
+          <Link href="/" className="rounded hover:text-[#005f73] focus:outline-none focus:ring-2 focus:ring-[#f77f00]">Início</Link><span aria-hidden="true">/</span>
+          <Link href={`/${estado}/${cidade}`} className="hover:text-[#005f73]">{cityName}</Link><span aria-hidden="true">/</span><span className="font-medium text-gray-700">{categoryName}</span>
         </nav>
-
-        {/* Page Header */}
-        <header className="border-b border-[#005f73]/20 pb-4">
-          <h1 className="text-3xl md:text-4xl font-bold capitalize text-[#005f73]">
-            {categoria.replace(/-/g, ' ')} em {cidade.replace(/-/g, ' ')}
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Encontre os melhores serviços locais em {cidade.replace(/-/g, ' ')}, {estado.toUpperCase()}.
-          </p>
+        <header className="border-b border-[#005f73]/20 pb-5">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#f77f00]">Catálogo aberto · ODbL</p>
+          <h1 className="text-3xl font-bold capitalize text-[#005f73] md:text-4xl">{categoryName} em {cityName}</h1>
+          <p className="mt-2 text-gray-600">{companies.length.toLocaleString('pt-BR')} registros mapeados. O catálogo não representa todas as empresas da cidade.</p>
         </header>
-
-        {/* Action / Filter Bar */}
-        <section className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded shadow-sm border border-gray-100">
-          <div className="flex gap-2">
-            <button className="px-4 py-2 text-sm font-medium border border-gray-200 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#f77f00]">
-              Mais Avaliados
-            </button>
-            <button className="px-4 py-2 text-sm font-medium border border-gray-200 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#f77f00]">
-              Abertos Agora
-            </button>
-          </div>
-          <p className="text-sm text-gray-500">{companies.length} resultados encontrados</p>
-        </section>
-
-        {/* Listings Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <section aria-label={`Empresas de ${categoryName}`} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {companies.map((company) => (
-            <article 
-              key={company.id} 
-              className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow relative"
-            >
-              <div className="flex-1 space-y-3">
-                <div className="flex justify-between items-start">
-                  <h2 className="text-lg font-bold text-[#005f73] line-clamp-2">
-                    {company.name}
-                  </h2>
-                </div>
-                
-                <address className="text-sm text-gray-600 not-italic flex items-start gap-2">
-                  <span aria-hidden="true">📍</span>
-                  <span>{company.address}</span>
-                </address>
-                
-                <p className="text-sm text-gray-600 flex items-center gap-2">
-                  <span aria-hidden="true">📞</span>
-                  {company.phone}
-                </p>
-
-                <div className="flex flex-wrap gap-2 pt-2">
-                  <span className={`text-xs font-semibold px-2 py-1 rounded ${company.status === 'Aberto' ? 'bg-[#2a9d8f]/15 text-[#2a9d8f]' : 'bg-red-100 text-red-700'}`}>
-                    {company.status}
-                  </span>
-                  {company.verified && (
-                    <span className="text-xs font-semibold px-2 py-1 rounded bg-[#2a9d8f]/15 text-[#2a9d8f] flex items-center gap-1">
-                      <span aria-hidden="true">✓</span> Verificado
-                    </span>
-                  )}
-                </div>
+            <article key={`${company.id}`} className="flex h-full flex-col rounded-lg border border-gray-100 bg-white p-5 shadow-sm transition hover:shadow-md">
+              <div className="flex-1">
+                <h2 className="line-clamp-2 text-lg font-bold text-[#005f73]">{company.name}</h2>
+                {company.address && <address className="mt-3 text-sm not-italic text-gray-600">{company.address}</address>}
+                {company.neighbourhood && <p className="mt-2 text-sm text-gray-500">Bairro: {company.neighbourhood}</p>}
+                {company.phone && <p className="mt-2 text-sm text-gray-600">{company.phone}</p>}
+                <p className="mt-4 text-xs text-gray-500">Fonte: {company.source} · {company.source_license}</p>
               </div>
-
-              <div className="mt-6 pt-4 border-t border-gray-50">
-                <Link 
-                  href={`/${estado}/${cidade}/${categoria}/${company.slug}`}
-                  className="block w-full py-2 px-4 text-center text-sm font-bold text-[#f77f00] border-2 border-[#f77f00] rounded hover:bg-[#f77f00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#f77f00]"
-                >
-                  Ver Detalhes
-                </Link>
-              </div>
+              <Link href={`/${estado}/${cidade}/${categoria}/${company.slug}`} className="mt-5 block rounded-md border-2 border-[#f77f00] px-4 py-2 text-center text-sm font-bold text-[#f77f00] hover:bg-[#f77f00] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#f77f00]">Ver detalhes</Link>
             </article>
           ))}
         </section>
-
       </div>
     </main>
   );
