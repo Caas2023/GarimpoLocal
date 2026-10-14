@@ -8,7 +8,8 @@
 - [x] Formulário de reivindicação/correção
 - [x] Páginas individuais de empresas e categorias
 - [x] Persistência de Dados compatível com Vercel (Drizzle/Neon)
-- [x] Integração Google Places API (wrapper inicial) com testes unitários robustos (36 testes aprovados)
+- [x] Integração Google Places API (wrapper inicial) com testes unitários robustos
+- [x] Testes unitários para Server Actions de Cadastro e Correção (42 testes aprovados)
 - [x] Testes de Acessibilidade e E2E (Playwright/Jest) - Cobertura validada
 - [x] Vercel build & production verification (12 rotas geradas com sucesso)
 - [x] SEO, schema.org local business, sitemap dinâmico
