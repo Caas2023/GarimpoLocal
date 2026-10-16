@@ -1,0 +1,262 @@
+{
+  "3518800": [
+    {
+      "slug": "centro",
+      "name": "Centro",
+      "zone": "Centro",
+      "aliases": ["centro", "guarulhos centro", "centro historico"]
+    },
+    {
+      "slug": "cumbica",
+      "name": "Cumbica",
+      "zone": "Leste",
+      "aliases": ["cumbica", "jardim cumbica", "cidade industrial satelite de sao paulo", "vila cumbica", "aeroporto"]
+    },
+    {
+      "slug": "pimentas",
+      "name": "Pimentas",
+      "zone": "Leste",
+      "aliases": ["pimentas", "jd dos pimentas", "jardim dos pimentas", "bairro dos pimentas", "jardim pimentas"]
+    },
+    {
+      "slug": "vila-galvao",
+      "name": "Vila Galvão",
+      "zone": "Oeste",
+      "aliases": ["vila galvao", "vl galvao", "vl. galvao", "vila galvão", "vl galvão", "vl. galvão"]
+    },
+    {
+      "slug": "macedo",
+      "name": "Macedo",
+      "zone": "Centro",
+      "aliases": ["macedo", "jardim macedo", "jd macedo", "vila macedo"]
+    },
+    {
+      "slug": "parque-cecap",
+      "name": "Parque Cecap",
+      "zone": "Centro-Leste",
+      "aliases": ["cecap", "pq cecap", "pq. cecap", "parque cecap", "conjunto cecap"]
+    },
+    {
+      "slug": "taboao",
+      "name": "Taboão",
+      "zone": "Nordeste",
+      "aliases": ["taboao", "taboão", "jardim taboao", "jd taboao"]
+    },
+    {
+      "slug": "bonsucesso",
+      "name": "Bonsucesso",
+      "zone": "Leste",
+      "aliases": ["bonsucesso", "jardim bonsucesso", "jd bonsucesso", "vila bonsucesso"]
+    },
+    {
+      "slug": "vila-rio-de-janeiro",
+      "name": "Vila Rio de Janeiro",
+      "zone": "Norte",
+      "aliases": ["vila rio de janeiro", "vila rio", "vl rio", "vl. rio", "vl rio de janeiro", "jardim rio de janeiro"]
+    },
+    {
+      "slug": "cocaia",
+      "name": "Jardim Cocaia",
+      "zone": "Norte",
+      "aliases": ["cocaia", "jd cocaia", "jd. cocaia", "jardim cocaia"]
+    },
+    {
+      "slug": "bom-clima",
+      "name": "Bom Clima",
+      "zone": "Centro",
+      "aliases": ["bom clima", "jardim bom clima", "jd bom clima", "jd. bom clima"]
+    },
+    {
+      "slug": "vila-augusta",
+      "name": "Vila Augusta",
+      "zone": "Sul",
+      "aliases": ["vila augusta", "vl augusta", "vl. augusta"]
+    },
+    {
+      "slug": "parque-renato-maia",
+      "name": "Parque Renato Maia",
+      "zone": "Centro-Norte",
+      "aliases": ["parque renato maia", "pq renato maia", "parque maia", "jardim maia", "jd maia", "jd. maia", "maia"]
+    },
+    {
+      "slug": "presidente-dutra",
+      "name": "Jardim Presidente Dutra",
+      "zone": "Leste",
+      "aliases": ["presidente dutra", "jardim presidente dutra", "jd presidente dutra", "dutra", "jd dutra"]
+    },
+    {
+      "slug": "ponte-grande",
+      "name": "Ponte Grande",
+      "zone": "Sul",
+      "aliases": ["ponte grande", "jardim ponte grande", "jd ponte grande"]
+    },
+    {
+      "slug": "itapegica",
+      "name": "Itapegica",
+      "zone": "Sul",
+      "aliases": ["itapegica", "vila itapegica", "vl itapegica"]
+    },
+    {
+      "slug": "gopouva",
+      "name": "Gopouva",
+      "zone": "Centro-Sul",
+      "aliases": ["gopouva", "gopoúva", "jardim gopouva", "jd gopouva"]
+    },
+    {
+      "slug": "morros",
+      "name": "Morros",
+      "zone": "Norte",
+      "aliases": ["morros", "jardim morros", "jd morros", "bela vista morros"]
+    },
+    {
+      "slug": "cabucu",
+      "name": "Cabuçu",
+      "zone": "Norte",
+      "aliases": ["cabucu", "cabuçu", "recreio sao jorge", "novo recreio"]
+    },
+    {
+      "slug": "fortaleza",
+      "name": "Fortaleza",
+      "zone": "Nordeste",
+      "aliases": ["fortaleza", "jardim fortaleza", "jd fortaleza"]
+    },
+    {
+      "slug": "lavras",
+      "name": "Lavras",
+      "zone": "Nordeste",
+      "aliases": ["lavras", "bairro de lavras"]
+    },
+    {
+      "slug": "sao-roque",
+      "name": "São Roque",
+      "zone": "Nordeste",
+      "aliases": ["sao roque", "são roque", "jardim sao roque"]
+    },
+    {
+      "slug": "agua-azul",
+      "name": "Água Azul",
+      "zone": "Norte",
+      "aliases": ["agua azul", "água azul", "chacaras agua azul"]
+    },
+    {
+      "slug": "bananal",
+      "name": "Bananal",
+      "zone": "Nordeste",
+      "aliases": ["bananal", "parque santos dumont"]
+    },
+    {
+      "slug": "sadokim",
+      "name": "Sadokim",
+      "zone": "Leste",
+      "aliases": ["sadokim", "jardim sadokim"]
+    },
+    {
+      "slug": "varzea-do-palacio",
+      "name": "Várzea do Palácio",
+      "zone": "Leste",
+      "aliases": ["varzea do palacio", "várzea do palácio"]
+    },
+    {
+      "slug": "aracilia",
+      "name": "Aracília",
+      "zone": "Leste",
+      "aliases": ["aracilia", "aracília"]
+    },
+    {
+      "slug": "agua-chata",
+      "name": "Água Chata",
+      "zone": "Leste",
+      "aliases": ["agua chata", "água chata", "parque piratininga"]
+    },
+    {
+      "slug": "inocoop",
+      "name": "Inocoop",
+      "zone": "Leste",
+      "aliases": ["inocoop", "residencial inocoop"]
+    },
+    {
+      "slug": "jardim-sao-joao",
+      "name": "Jardim São João",
+      "zone": "Nordeste",
+      "aliases": ["sao joao", "são joão", "jardim sao joao", "jardim são joão", "jd sao joao"]
+    },
+    {
+      "slug": "jardim-alvorada",
+      "name": "Jardim Alvorada",
+      "zone": "Leste",
+      "aliases": ["alvorada", "jardim alvorada", "jd alvorada"]
+    },
+    {
+      "slug": "tranquilidade",
+      "name": "Tranquilidade",
+      "zone": "Sul",
+      "aliases": ["tranquilidade", "jardim tranquilidade", "jd tranquilidade"]
+    },
+    {
+      "slug": "jardim-soberana",
+      "name": "Jardim Soberana",
+      "zone": "Nordeste",
+      "aliases": ["soberana", "jardim soberana", "jd soberana"]
+    },
+    {
+      "slug": "vila-barros",
+      "name": "Vila Barros",
+      "zone": "Norte",
+      "aliases": ["vila barros", "vl barros", "vl. barros"]
+    },
+    {
+      "slug": "bela-vista",
+      "name": "Bela Vista",
+      "zone": "Norte",
+      "aliases": ["bela vista", "jardim bela vista", "jd bela vista"]
+    },
+    {
+      "slug": "monte-carmelo",
+      "name": "Monte Carmelo",
+      "zone": "Norte",
+      "aliases": ["monte carmelo", "jardim monte carmelo", "jd monte carmelo"]
+    },
+    {
+      "slug": "vila-fatima",
+      "name": "Vila Fátima",
+      "zone": "Centro",
+      "aliases": ["vila fatima", "vila fátima", "vl fatima", "vl. fatima"]
+    },
+    {
+      "slug": "picanco",
+      "name": "Picanço",
+      "zone": "Oeste",
+      "aliases": ["picanco", "picanço", "jardim picanco"]
+    },
+    {
+      "slug": "torres-tibagy",
+      "name": "Torres Tibagy",
+      "zone": "Oeste",
+      "aliases": ["torres tibagy", "tibagy", "jardim tibagy"]
+    },
+    {
+      "slug": "paraventi",
+      "name": "Jardim Paraventi",
+      "zone": "Centro",
+      "aliases": ["paraventi", "jardim paraventi", "jd paraventi"]
+    },
+    {
+      "slug": "santa-mena",
+      "name": "Jardim Santa Mena",
+      "zone": "Centro",
+      "aliases": ["santa mena", "jardim santa mena", "jd santa mena"]
+    },
+    {
+      "slug": "flor-da-montanha",
+      "name": "Jardim Flor da Montanha",
+      "zone": "Oeste",
+      "aliases": ["flor da montanha", "jardim flor da montanha", "jd flor da montanha"]
+    },
+    {
+      "slug": "vila-rosalia",
+      "name": "Vila Rosália",
+      "zone": "Oeste",
+      "aliases": ["vila rosalia", "vila rosália", "vl rosalia", "vl. rosalia"]
+    }
+  ]
+}

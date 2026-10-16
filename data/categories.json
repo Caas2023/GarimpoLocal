@@ -1,0 +1,226 @@
+[
+  {
+    "slug": "alimentacao",
+    "label": "Alimentação",
+    "description": "Lanchonetes, padarias, confeitarias, docerias e alimentação rápida.",
+    "icon": "utensils",
+    "keywords": ["lanche", "padaria", "cafe", "cafeteria", "confeitaria", "pizzaria", "hamburguer", "acai", "sorvete", "salgados"]
+  },
+  {
+    "slug": "restaurantes",
+    "label": "Restaurantes",
+    "description": "Restaurantes à la carte, self-service, churrascarias e gastronomia especializada.",
+    "icon": "chef-hat",
+    "keywords": ["restaurante", "churrascaria", "bistro", "comida", "almoco", "jantar", "self-service", "rodizio"]
+  },
+  {
+    "slug": "bares",
+    "label": "Bares",
+    "description": "Bares, choperias, pubs e botecos com bebidas e petiscos.",
+    "icon": "glass-cheers",
+    "keywords": ["bar", "pub", "choperia", "boteco", "cervejaria", "drinques", "happy-hour"]
+  },
+  {
+    "slug": "supermercados",
+    "label": "Supermercados",
+    "description": "Supermercados, hipermercados e atacadões com alimentos e utilidades.",
+    "icon": "shopping-cart",
+    "keywords": ["supermercado", "hipermercado", "atacadao", "atacadista", "mercearia", "varejo"]
+  },
+  {
+    "slug": "mercados",
+    "label": "Mercados",
+    "description": "Mercados de bairro, empórios, hortifrutis, açougues e peixarias.",
+    "icon": "store",
+    "keywords": ["mercado", "acougue", "hortifruti", "peixaria", "emporio", "quitanda"]
+  },
+  {
+    "slug": "saude",
+    "label": "Saúde",
+    "description": "Clínicas médicas, odontológicas, hospitais, laboratórios e centros de diagnóstico.",
+    "icon": "heart-pulse",
+    "keywords": ["clinica", "medico", "hospital", "dentista", "odontologia", "laboratorio", "exames", "fisioterapia", "psicologia"]
+  },
+  {
+    "slug": "beleza",
+    "label": "Beleza",
+    "description": "Salões de beleza, barbearias, clínicas de estética e cuidados pessoais.",
+    "icon": "scissors",
+    "keywords": ["salao", "barbearia", "barbeiro", "estetica", "manicure", "cabelo", "maquiagem", "depilacao", "spa"]
+  },
+  {
+    "slug": "moda",
+    "label": "Moda",
+    "description": "Lojas de roupas, calçados, bolsas, acessórios e artigos esportivos.",
+    "icon": "shirt",
+    "keywords": ["loja-de-roupa", "calcados", "sapatos", "bolsas", "acessorios", "moda-feminina", "moda-masculina", "moda-infantil"]
+  },
+  {
+    "slug": "tecnologia",
+    "label": "Tecnologia",
+    "description": "Assistência técnica, informática, celulares, telecomunicações e desenvolvimento.",
+    "icon": "laptop",
+    "keywords": ["informatica", "computador", "celular", "smartphone", "assistencia-tecnica", "software", "internet", "games"]
+  },
+  {
+    "slug": "servicos",
+    "label": "Serviços",
+    "description": "Serviços profissionais, manutenção residencial, chaveiros, lavanderias e consultorias.",
+    "icon": "wrench",
+    "keywords": ["chaveiro", "lavanderia", "eletricista", "encanador", "marcenaria", "consultoria", "assistencia", "limpeza", "seguranca"]
+  },
+  {
+    "slug": "educacao",
+    "label": "Educação",
+    "description": "Escolas, creches, colégios, universidades, cursos de idiomas e treinamento.",
+    "icon": "graduation-cap",
+    "keywords": ["escola", "colegio", "faculdade", "universidade", "curso", "idiomas", "ingles", "creche", "treinamento"]
+  },
+  {
+    "slug": "esportes",
+    "label": "Esportes",
+    "description": "Academias, centros de artes marciais, crossfit, quadras e artigos esportivos.",
+    "icon": "dumbbell",
+    "keywords": ["academia", "musculacao", "crossfit", "natacao", "artes-marciais", "quadra", "futebol", "esportes"]
+  },
+  {
+    "slug": "financas",
+    "label": "Finanças",
+    "description": "Agências bancárias, caixas eletrônicos, cooperativas, crédito e câmbio.",
+    "icon": "landmark",
+    "keywords": ["banco", "caixa-eletronico", "cooperativa", "credito", "emprestimo", "investimentos", "cambio"]
+  },
+  {
+    "slug": "automoveis",
+    "label": "Automóveis",
+    "description": "Oficinas mecânicas, funilaria, auto peças, lava-rápido e concessionárias.",
+    "icon": "car",
+    "keywords": ["oficina", "mecanica", "auto-eletrica", "funilaria", "auto-pecas", "pneus", "lava-rapido", "concessionaria", "motos"]
+  },
+  {
+    "slug": "postos",
+    "label": "Postos de Combustível",
+    "description": "Postos de combustíveis, conveniência, troca de óleo e GNV.",
+    "icon": "fuel-pump",
+    "keywords": ["posto", "gasolina", "etanol", "diesel", "gnv", "troca-de-oleo", "conveniencia"]
+  },
+  {
+    "slug": "transporte",
+    "label": "Transporte",
+    "description": "Táxis, transporte executivo, frotas, fretamento e locação de veículos.",
+    "icon": "truck",
+    "keywords": ["taxi", "transfer", "fretamento", "locadora", "aluguel-de-carros", "van", "onibus"]
+  },
+  {
+    "slug": "logistica",
+    "label": "Logística & Entregas",
+    "description": "Motofrete, entregas expressas B2B, transportadoras, armazenagem e distribuição.",
+    "icon": "package",
+    "keywords": ["motofrete", "motoboy", "entregas-expressas", "transportadora", "carga", "distribuicao", "armazem", "b2b"]
+  },
+  {
+    "slug": "advocacia",
+    "label": "Advocacia",
+    "description": "Escritórios de advocacia, consultoria jurídica e serviços legais.",
+    "icon": "scale",
+    "keywords": ["advogado", "escritorio-de-advocacia", "juridico", "direito-trabalhista", "direito-civil", "tributario", "previdenciario"]
+  },
+  {
+    "slug": "contabilidade",
+    "label": "Contabilidade",
+    "description": "Escritórios contábeis, assessoria fiscal, societária e folha de pagamento.",
+    "icon": "calculator",
+    "keywords": ["contabilidade", "contador", "fiscal", "folha-de-pagamento", "abertura-de-empresa", "cnpj", "auditoria"]
+  },
+  {
+    "slug": "hoteis",
+    "label": "Hotéis & Hospedagem",
+    "description": "Hotéis, pousadas, apart-hotéis, hostels e acomodações executivas.",
+    "icon": "bed",
+    "keywords": ["hotel", "pousada", "hostel", "hospedagem", "apart-hotel", "quarto", "estadia"]
+  },
+  {
+    "slug": "pet",
+    "label": "Pet Shop & Veterinária",
+    "description": "Clínicas veterinárias, pet shops, banho e tosa e rações.",
+    "icon": "paw",
+    "keywords": ["pet-shop", "veterinaria", "veterinario", "banho-e-tosa", "racao", "clinica-veterinaria", "animais"]
+  },
+  {
+    "slug": "farmacias",
+    "label": "Farmácias",
+    "description": "Farmácias, drogarias e farmácias de manipulação.",
+    "icon": "pill",
+    "keywords": ["farmacia", "drogaria", "remedios", "medicamentos", "manipulacao", "droga"]
+  },
+  {
+    "slug": "otica",
+    "label": "Óticas",
+    "description": "Óticas, armações, lentes de contato e óculos de sol.",
+    "icon": "glasses",
+    "keywords": ["otica", "oculos", "lentes", "armacao", "visao", "optometria"]
+  },
+  {
+    "slug": "seguros",
+    "label": "Seguros",
+    "description": "Corretoras de seguros de vida, automóveis, patrimoniais e empresariais.",
+    "icon": "shield-check",
+    "keywords": ["seguro", "corretora-de-seguros", "seguro-auto", "seguro-de-vida", "plano-de-saude", "previdencia"]
+  },
+  {
+    "slug": "imobiliarias",
+    "label": "Imobiliárias",
+    "description": "Imobiliárias, corretores, locação, compra e venda de imóveis comerciais e residenciais.",
+    "icon": "home",
+    "keywords": ["imobiliaria", "corretor", "imoveis", "aluguel", "venda", "apartamento", "galpao", "sala-comercial"]
+  },
+  {
+    "slug": "construcao",
+    "label": "Construção",
+    "description": "Lojas de materiais de construção, tintas, ferragens, iluminação e acabamentos.",
+    "icon": "hammer",
+    "keywords": ["material-de-construcao", "tintas", "ferragens", "eletrica", "hidraulica", "cimento", "acabamento", "reforma"]
+  },
+  {
+    "slug": "graficas",
+    "label": "Gráficas & Comunicação",
+    "description": "Gráficas rápidas, offset, comunicação visual, banners e brindes corporativos.",
+    "icon": "printer",
+    "keywords": ["grafica", "impressao", "banner", "adesivo", "comunicacao-visual", "cartao-de-visita", "brindes"]
+  },
+  {
+    "slug": "eventos",
+    "label": "Eventos & Festas",
+    "description": "Buffets, salões de festas, locação de equipamentos, decoração e som.",
+    "icon": "sparkles",
+    "keywords": ["buffet", "salao-de-festas", "decoracao", "som-e-iluminacao", "casamento", "aniversario", "corporativo"]
+  },
+  {
+    "slug": "turismo",
+    "label": "Turismo",
+    "description": "Agências de viagens, câmbio de moedas, excursões e passagens.",
+    "icon": "compass",
+    "keywords": ["agencia-de-viagens", "turismo", "passagens", "pacotes", "excursoes", "cruzeiros"]
+  },
+  {
+    "slug": "servicos-publicos",
+    "label": "Serviços Públicos",
+    "description": "Órgãos municipais, estaduais, federais, postos de atendimento ao cidadão e cartórios.",
+    "icon": "building-library",
+    "keywords": ["prefeitura", "cartorio", "poupatempo", "receita-federal", "inss", "policia", "posto-de-saude", "governo"]
+  },
+  {
+    "slug": "shopping",
+    "label": "Shopping Centers",
+    "description": "Shopping centers, centros de compras, galerias e outlets.",
+    "icon": "building-store",
+    "keywords": ["shopping", "galeria", "centro-comercial", "outlet", "mall"]
+  },
+  {
+    "slug": "outros",
+    "label": "Outros Estabelecimentos",
+    "description": "Outros estabelecimentos, associações e atividades comerciais diversas.",
+    "icon": "briefcase",
+    "keywords": ["outros", "geral", "associacao", "comercio", "negocio"]
+  }
+]
