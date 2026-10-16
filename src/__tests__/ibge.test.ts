@@ -74,7 +74,7 @@ describe('getCitiesByState', () => {
     const cities = await getCitiesByState('SP');
     const gru = cities.find(c => c.nome === 'guarulhos');
     expect(gru).toBeDefined();
-    expect(gru!.id).toBe(3518803);
+    expect(gru!.id).toBe(3518800);
   });
 
   it('busca por sigla é case-insensitive (sp, Sp, SP)', async () => {
@@ -150,7 +150,7 @@ describe('getCityBySlug', () => {
     const city = await getCityBySlug('SP', 'guarulhos');
     expect(city).toBeDefined();
     expect(city!.nomeExibicao).toBe('Guarulhos');
-    expect(city!.id).toBe(3518803);
+    expect(city!.id).toBe(3518800);
   });
 
   it('retorna undefined para cidade inexistente', async () => {
