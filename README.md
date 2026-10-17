@@ -10,6 +10,7 @@ Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 - Cards mostram telefone, WhatsApp, site e mapa quando o dado existe na fonte.
 - Fonte, licença ODbL, data e cobertura limitada devem permanecer visíveis.
 - Não afirmar cobertura total: OSM depende do que foi mapeado e não representa todas as empresas.
+- Autenticação de empresários implementada (`src/lib/auth.ts`): registro e login com bcryptjs (custo 12), sessão httpOnly via iron-session, rotas `/api/auth/login`, `/api/auth/register` e `/api/auth/logout`. `SESSION_SECRET` (≥ 32 chars) deve ser variável de ambiente; nunca no Git.
 - Endpoint de reivindicação/correção valida localidade IBGE, e-mail, sanitização e dígitos verificadores do CNPJ.
 - A persistência de reivindicações depende da camada de armazenamento Vercel agora implementada em `lib/claim_store.js`; sem `KV_REST_API_URL` e `KV_REST_API_TOKEN`, `POST /api/claim` retorna `503` e não confirma o protocolo.
 - A camada de persistência do catálogo nacional de empresas (`lib/company_store.js`) suporta Vercel KV / Upstash Redis REST com particionamento por código IBGE, indexação de slugs por categoria e pipeline em lote (`saveCompaniesBatch`); opera com fallback limpo na cidade-piloto e isolamento estrito entre municípios.

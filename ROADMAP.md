@@ -13,7 +13,7 @@ Atualizado em 17/10/2026.
 ## Próxima tarefa recomendada
 
 - [ ] Integrar importação controlada de municípios/UFs via fonte oficial IBGE, ampliando `data/localities.json` sem incluir empresas inventadas.
-- [ ] Persistência de contas e sessões (hash de senha, cookie httpOnly, expiração) — ainda não iniciado.
+- [x] Persistência de contas e sessões — bcryptjs (custo 12) + iron-session (cookie httpOnly SameSite=Lax, 7 dias). `src/lib/auth.ts`, migration `drizzle/0001_add_user_auth.sql`. Requer `SESSION_SECRET` (≥ 32 chars) + `DATABASE_URL` como variáveis de ambiente; não persiste quando banco/sessão não configurados (falha explícita 503).
 - [ ] Publicação GitHub e deploy Vercel verificado com URL de produção.
 - [x] Categorias e bairros canônicos (normalização e mapeamento de bairros/distritos por código IBGE para filtros avançados de busca).
 - [x] Importador e sincronizador de dados OSM com paginação, deduplicação e carga em lote no catálogo persistente (`lib/osm_importer.js`, `scripts/sync_osm_companies.js`, `api/places.js` nacional com suporte a `company_store`).
@@ -103,7 +103,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - [x] Credencial fixa de login (`teste@empresa.com` / `123456`) removida do código.
 - [x] `js/auth.js` removido: mock de `localStorage` sem nenhuma referência no código.
 - [x] Validação de CNPJ, e-mail e senha para o cadastro em `src/lib/cadastro.ts`.
-- [ ] Persistência de contas e sessões (hash, cookie, expiração) — **não iniciado**.
+- [x] Persistência de contas e sessões (hash bcryptjs custo 12, cookie httpOnly iron-session, expiração 7 dias) — `src/lib/auth.ts`.
 
 ### Fase 4 — Receita
 

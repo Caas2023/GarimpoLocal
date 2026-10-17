@@ -50,6 +50,9 @@ export const claims = pgTable('claims', {
 export const users = pgTable('users', {
   id: text('id').primaryKey(),
   email: varchar('email', { length: 255 }).notNull().unique(),
+  /** Bcrypt hash (custo ≥ 12). Nulo para usuários OAuth futuros. */
+  passwordHash: varchar('password_hash', { length: 255 }),
   name: varchar('name', { length: 255 }),
   createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
 });
