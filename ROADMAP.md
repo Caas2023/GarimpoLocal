@@ -1,6 +1,6 @@
 # Roadmap — Guarulhos Aberta
 
-Atualizado em 02/10/2026.
+Atualizado em 17/10/2026.
 
 ## Nome e posicionamento
 
@@ -13,7 +13,9 @@ Atualizado em 02/10/2026.
 ## Próxima tarefa recomendada
 
 - [ ] Integrar importação controlada de municípios/UFs via fonte oficial IBGE, ampliando `data/localities.json` sem incluir empresas inventadas.
-- [x] Categorias e bairros canônicos nacionais (normalização e mapeamento de bairros/distritos por código IBGE para filtros avançados de busca).
+- [ ] Persistência de contas e sessões (hash de senha, cookie httpOnly, expiração) — ainda não iniciado.
+- [ ] Publicação GitHub e deploy Vercel verificado com URL de produção.
+- [x] Categorias e bairros canônicos (normalização e mapeamento de bairros/distritos por código IBGE para filtros avançados de busca).
 - [x] Importador e sincronizador de dados OSM com paginação, deduplicação e carga em lote no catálogo persistente (`lib/osm_importer.js`, `scripts/sync_osm_companies.js`, `api/places.js` nacional com suporte a `company_store`).
 - [x] Persistência do catálogo de empresas compatível com Vercel, sem depender do JSON versionado (`lib/company_store.js` com Vercel KV REST, particionamento IBGE, índice de slug, batch pipeline e fallback).
 - [x] Persistência compatível com Vercel para reivindicações/correções via REST KV, com falha fechada (`503`) quando as variáveis não estão configuradas.
@@ -25,6 +27,7 @@ Atualizado em 02/10/2026.
 - [x] `api/places.js` atualizado para arquitetura nacional: consulta prioritária ao catálogo persistente (`company_store`), fallback dinâmico Overpass delimitado por município e compatibilidade com cidade-piloto.
 - [x] Função `getLocalityBySlug` implementada e exportada em `lib/localities.js`.
 - [x] 101 testes automatizados cobrindo todo o pipeline de importação, busca, persistência, sitemap e schemas.
+- [x] Lógica de proveniência e badge da página individual extraída para `src/lib/company-page.ts`: badge dinâmico (OSM/Google/não-verificado), `getProvenanceInfo` com atribuição ODbL obrigatória, `buildLocalBusinessJsonLd` sem campos vazios; 19 testes unitários. Removido "MOCK/VERIFICADO" hardcoded da página de empresa.
 
 ## Arquitetura atual
 
