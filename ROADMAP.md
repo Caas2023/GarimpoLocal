@@ -90,8 +90,17 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - Verificação por e-mail/domínio/documentação.
 - Painel empresário.
 - [x] Correção, remoção e trilha de auditoria estruturada (pending_verification com sanitização e CNPJ).
-- [x] Validação dos dígitos verificadores do CNPJ antes de aceitar reivindicações.
+- [x] Validação dos dígitos verificadores do CNPJ antes de aceitar reivindicações
+      (implementação corrigida: os pesos oficiais 5,4,3,2,9,8,7,6,5,4,3,2 foram
+      restaurados em `lib/claim_submission.js`).
 - [x] Limites de tamanho e formato para entrada de reivindicações.
+- [x] Rotas `/login` e `/empresas/cadastro` deixam de anunciar um serviço inexistente:
+      sem hashing, sessão ou credencial armazenada, elas falham de forma explícita e
+      direcionam o usuário para a reivindicação de página, que funciona.
+- [x] Credencial fixa de login (`teste@empresa.com` / `123456`) removida do código.
+- [x] `js/auth.js` removido: mock de `localStorage` sem nenhuma referência no código.
+- [x] Validação de CNPJ, e-mail e senha para o cadastro em `src/lib/cadastro.ts`.
+- [ ] Persistência de contas e sessões (hash, cookie, expiração) — **não iniciado**.
 
 ### Fase 4 — Receita
 

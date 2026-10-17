@@ -1,16 +1,26 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": ["jest", "node"],
-    "module": "commonjs",
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "noEmit": false,
-    "isolatedModules": false
+    "target": "ES2017",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@legacy/*": ["./lib/*"]
+    }
   },
   "include": [
-    "src/__tests__/**/*.ts",
-    "src/__tests__/**/*.tsx",
-    "__mocks__/**/*.ts"
+    "src/__tests__",
+    "__mocks__",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/types"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "e2e", "api"]
 }

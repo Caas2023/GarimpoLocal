@@ -55,15 +55,19 @@ Guarulhos será laboratório inicial. Produto não poderá depender estruturalme
 ## 5. Usuários
 
 ### Visitante
+
 Busca empresa e entra em contato.
 
 ### Comprador B2B
+
 Busca fornecedor, compara opções e solicita orçamento.
 
 ### Empresário
+
 Cadastra, reivindica, atualiza ou remove dados da empresa.
 
 ### Administrador
+
 Modera cadastros, valida correções, monitora fonte, qualidade e abuso.
 
 ## 6. Proposta de valor

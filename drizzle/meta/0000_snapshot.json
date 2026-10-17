@@ -45,9 +45,7 @@
         "categories_slug_unique": {
           "name": "categories_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       },
       "policies": {},
@@ -164,12 +162,8 @@
           "name": "claims_company_id_companies_id_fk",
           "tableFrom": "claims",
           "tableTo": "companies",
-          "columnsFrom": [
-            "company_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["company_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -278,12 +272,8 @@
           "name": "companies_city_id_cities_id_fk",
           "tableFrom": "companies",
           "tableTo": "cities",
-          "columnsFrom": [
-            "city_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["city_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -291,12 +281,8 @@
           "name": "companies_category_id_categories_id_fk",
           "tableFrom": "companies",
           "tableTo": "categories",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["category_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -344,9 +330,7 @@
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "policies": {},

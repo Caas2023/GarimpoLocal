@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * api/places.js
@@ -12,18 +12,24 @@
  * - Conformidade estrita: licença ODbL 1.0, proveniência transparente e aviso de cobertura limitada.
  */
 
-const { getLocalityByMunicipalityId, getLocalityBySlug } = require("../lib/localities");
-const { getNeighborhoodsByMunicipalityId, normalizeNeighborhood } = require("../lib/neighborhoods");
-const { listCompanies } = require("../lib/company_store");
-const { buildOverpassQuery, parseOsmElements, OVERPASS_DEFAULT_URL, OVERPASS_USER_AGENT } = require("../lib/osm_importer");
+const { getLocalityByMunicipalityId, getLocalityBySlug } = require('../lib/localities');
+const { normalizeNeighborhood } = require('../lib/neighborhoods');
+const { listCompanies } = require('../lib/company_store');
+const {
+  buildOverpassQuery,
+  parseOsmElements,
+  OVERPASS_DEFAULT_URL,
+  OVERPASS_USER_AGENT,
+} = require('../lib/osm_importer');
 
 const fetchImpl = globalThis.fetch;
 
 module.exports = async function handler(request, response) {
   const queryParams = request.query || {};
-  const rawQuery = queryParams.query || "empresas em Guarulhos SP";
+  const rawQuery = queryParams.query || 'empresas em Guarulhos SP';
   const { municipalityId, stateSlug, municipalitySlug, categorySlug } = queryParams;
-  const rawNeighbourhood = queryParams.neighbourhood || queryParams.bairro || queryParams.neighbourhoodSlug || "";
+  const rawNeighbourhood =
+    queryParams.neighbourhood || queryParams.bairro || queryParams.neighbourhoodSlug || '';
 
   // 1. Resolução da localidade nacional
   let locality = null;
@@ -33,22 +39,20 @@ module.exports = async function handler(request, response) {
     locality = getLocalityBySlug(stateSlug, municipalitySlug);
   } else {
     // Padrão da implantação piloto
-    locality = getLocalityByMunicipalityId("3518800");
+    locality = getLocalityByMunicipalityId('3518800');
   }
 
   if (!locality) {
     return response.status(404).json({
-      error: "Not Found",
-      message: "Localidade IBGE não encontrada ou não cadastrada no catálogo nacional",
+      error: 'Not Found',
+      message: 'Localidade IBGE não encontrada ou não cadastrada no catálogo nacional',
       places: [],
     });
   }
 
   const needle = String(rawQuery).trim().toLowerCase();
   const isGenericQuery =
-    !needle ||
-    needle === "empresas em guarulhos sp" ||
-    needle.startsWith("empresas em ");
+    !needle || needle === 'empresas em guarulhos sp' || needle.startsWith('empresas em ');
 
   const neighborhood = rawNeighbourhood
     ? normalizeNeighborhood(String(rawNeighbourhood), locality.municipalityId)
@@ -66,32 +70,30 @@ module.exports = async function handler(request, response) {
 
     if (Array.isArray(stored) && stored.length > 0) {
       const places = stored.map((c) => ({
-        id: c.source_id || `osm-${c.osm_type || "node"}-${c.id}`,
+        id: c.source_id || `osm-${c.osm_type || 'node'}-${c.id}`,
         name: c.name,
-        category: c.category_label || c.category || "Empresa local",
+        category: c.category_label || c.category || 'Empresa local',
         categorySlug: c.categorySlug,
-        neighbourhood: c.neighbourhood || "",
-        neighbourhoodSlug: c.neighbourhoodSlug || "",
+        neighbourhood: c.neighbourhood || '',
+        neighbourhoodSlug: c.neighbourhoodSlug || '',
         formattedAddress:
-          c.formattedAddress ||
-          c.address ||
-          `${locality.municipalityName} — ${locality.stateCode}`,
-        phone: c.phone || "",
-        whatsapp: c.whatsapp || "",
-        website: c.website || "",
+          c.formattedAddress || c.address || `${locality.municipalityName} — ${locality.stateCode}`,
+        phone: c.phone || '',
+        whatsapp: c.whatsapp || '',
+        website: c.website || '',
         lat: c.lat,
         lng: c.lng,
-        source: c.source || "OpenStreetMap",
-        sourceUrl: c.source_url || "https://www.openstreetmap.org/",
-        source_license: c.source_license || "ODbL 1.0",
+        source: c.source || 'OpenStreetMap',
+        sourceUrl: c.source_url || 'https://www.openstreetmap.org/',
+        source_license: c.source_license || 'ODbL 1.0',
       }));
 
       return response.status(200).json({
         places,
         source: {
-          name: "OpenStreetMap",
-          url: "https://www.openstreetmap.org/",
-          license: "ODbL 1.0",
+          name: 'OpenStreetMap',
+          url: 'https://www.openstreetmap.org/',
+          license: 'ODbL 1.0',
         },
         locality: {
           municipalityId: locality.municipalityId,
@@ -99,17 +101,17 @@ module.exports = async function handler(request, response) {
           stateCode: locality.stateCode,
           stateSlug: locality.stateSlug,
           municipalitySlug: locality.municipalitySlug,
-          neighbourhood: neighborhood?.name || "",
-          neighbourhoodSlug: neighborhood?.slug || "",
+          neighbourhood: neighborhood?.name || '',
+          neighbourhoodSlug: neighborhood?.slug || '',
         },
         query: rawQuery,
         fetchedAt: new Date().toISOString(),
         coverage:
-          "dados persistentes com proveniência OpenStreetMap; não representa a totalidade das empresas",
-        provider: "persistent-store",
+          'dados persistentes com proveniência OpenStreetMap; não representa a totalidade das empresas',
+        provider: 'persistent-store',
       });
     }
-  } catch (storeError) {
+  } catch {
     // Se a consulta ao store falhar, segue para fallback Overpass
   }
 
@@ -117,13 +119,13 @@ module.exports = async function handler(request, response) {
   try {
     const overpassQuery = buildOverpassQuery(locality, {
       timeout: 25,
-      neighbourhood: neighborhood?.name || "",
+      neighbourhood: neighborhood?.name || '',
     });
     const upstream = await fetchImpl(OVERPASS_DEFAULT_URL, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "User-Agent": OVERPASS_USER_AGENT,
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'User-Agent': OVERPASS_USER_AGENT,
       },
       body: new URLSearchParams({ data: overpassQuery }).toString(),
     });
@@ -137,11 +139,17 @@ module.exports = async function handler(request, response) {
     const normalizedCompanies = parseOsmElements(rawElements, locality);
 
     const filtered = normalizedCompanies.filter((place) => {
-      if (neighborhood?.slug && (place.neighbourhoodSlug || normalizeNeighborhood(place.neighbourhood, locality.municipalityId).slug) !== neighborhood.slug) {
+      if (
+        neighborhood?.slug &&
+        (place.neighbourhoodSlug ||
+          normalizeNeighborhood(place.neighbourhood, locality.municipalityId).slug) !==
+          neighborhood.slug
+      ) {
         return false;
       }
       if (isGenericQuery) return true;
-      const haystack = `${place.name} ${place.category_label} ${place.formattedAddress}`.toLowerCase();
+      const haystack =
+        `${place.name} ${place.category_label} ${place.formattedAddress}`.toLowerCase();
       return haystack.includes(needle);
     });
 
@@ -150,25 +158,25 @@ module.exports = async function handler(request, response) {
       name: c.name,
       category: c.category_label,
       categorySlug: c.categorySlug,
-      neighbourhood: c.neighbourhood || "",
-      neighbourhoodSlug: c.neighbourhoodSlug || "",
+      neighbourhood: c.neighbourhood || '',
+      neighbourhoodSlug: c.neighbourhoodSlug || '',
       formattedAddress: c.formattedAddress,
-      phone: c.phone || "",
-      whatsapp: c.whatsapp || "",
-      website: c.website || "",
+      phone: c.phone || '',
+      whatsapp: c.whatsapp || '',
+      website: c.website || '',
       lat: c.lat,
       lng: c.lng,
-      source: "OpenStreetMap",
+      source: 'OpenStreetMap',
       sourceUrl: c.source_url,
-      source_license: "ODbL 1.0",
+      source_license: 'ODbL 1.0',
     }));
 
     return response.status(200).json({
       places,
       source: {
-        name: "OpenStreetMap",
-        url: "https://www.openstreetmap.org/",
-        license: "ODbL 1.0",
+        name: 'OpenStreetMap',
+        url: 'https://www.openstreetmap.org/',
+        license: 'ODbL 1.0',
       },
       locality: {
         municipalityId: locality.municipalityId,
@@ -176,20 +184,19 @@ module.exports = async function handler(request, response) {
         stateCode: locality.stateCode,
         stateSlug: locality.stateSlug,
         municipalitySlug: locality.municipalitySlug,
-        neighbourhood: neighborhood?.name || "",
-        neighbourhoodSlug: neighborhood?.slug || "",
+        neighbourhood: neighborhood?.name || '',
+        neighbourhoodSlug: neighborhood?.slug || '',
       },
       query: rawQuery,
       fetchedAt: new Date().toISOString(),
-      coverage:
-        "objetos públicos mapeados no OSM; não representa todas as empresas",
-      provider: "overpass-live",
+      coverage: 'objetos públicos mapeados no OSM; não representa todas as empresas',
+      provider: 'overpass-live',
     });
   } catch (error) {
     return response.status(502).json({
       places: [],
       error: error.message,
-      source: { name: "OpenStreetMap", license: "ODbL 1.0" },
+      source: { name: 'OpenStreetMap', license: 'ODbL 1.0' },
       query: rawQuery,
     });
   }

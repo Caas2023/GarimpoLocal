@@ -14,7 +14,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const categories = getCategorySummary(String(city.id));
     return [
       { url: `${baseUrl}${cityPath}`, changeFrequency: 'daily' as const, priority: 0.8 },
-      ...categories.map((category) => ({ url: `${baseUrl}${cityPath}/${category.slug}`, changeFrequency: 'daily' as const, priority: 0.7 })),
+      ...categories.map((category) => ({
+        url: `${baseUrl}${cityPath}/${category.slug}`,
+        changeFrequency: 'daily' as const,
+        priority: 0.7,
+      })),
     ];
   });
 

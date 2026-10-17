@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+out/
+build/
+dist/
+
+# Generated / caches
+coverage/
+playwright-report/
+test-results/
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# Data — generated and machine-formatted JSON catalogs
+data/*.json
+
+# Lockfile and minified assets
+package-lock.json
+*.min.js
+*.min.css
+
+# OS / editor
+.DS_Store
+Thumbs.db

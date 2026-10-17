@@ -1,47 +1,44 @@
 'use server';
 
+import { validarCadastro } from '@/lib/cadastro';
+
 export type CadastroState = {
   success: boolean;
   error: string | null;
   message: string | null;
 };
 
-export async function submitCadastroEmpresa(prevState: CadastroState, formData: FormData): Promise<CadastroState> {
-  const cnpj = formData.get('cnpj') as string;
-  const email = formData.get('email') as string;
-  const senha = formData.get('senha') as string;
-  const termos = formData.get('termos');
+/**
+ * Cadastro de empresa.
+ *
+ * A Fase 3 (conta do usuário) ainda **não está implementada**: não há hashing
+ * de senha, nem armazenamento de credenciais, nem sessão. Publicar um
+ * "sucesso" aqui criaria contas que não existem e prometeria verificação por
+ * e-mail que nunca é enviada — o mesmo defeito que existia na rota de correção.
+ *
+ * Até a Fase 3 existir, a action valida a entrada com rigor e depois falha de
+ * forma explícita, dizendo ao usuário que nada foi criado.
+ */
+export async function submitCadastroEmpresa(
+  _prevState: CadastroState,
+  formData: FormData,
+): Promise<CadastroState> {
+  const validacao = validarCadastro({
+    cnpj: String(formData.get('cnpj') ?? ''),
+    email: String(formData.get('email') ?? ''),
+    senha: String(formData.get('senha') ?? ''),
+    termos: formData.get('termos') !== null,
+  });
 
-  if (!cnpj || !email || !senha) {
-    return {
-      success: false,
-      error: 'Preencha todos os campos obrigatórios (CNPJ, Email e Senha).',
-      message: null
-    };
+  if (!validacao.ok) {
+    return { success: false, error: validacao.mensagem, message: null };
   }
 
-  if (senha.length < 6) {
-    return {
-      success: false,
-      error: 'A senha deve conter no mínimo 6 caracteres.',
-      message: null
-    };
-  }
-
-  if (!termos) {
-    return {
-      success: false,
-      error: 'Você deve aceitar os termos de uso.',
-      message: null
-    };
-  }
-
-  // Simulating Database Insert (Vercel compatible persistence mock)
-  await new Promise(resolve => setTimeout(resolve, 800));
-
+  // Entrada válida, mas não há onde persistir a conta ainda.
   return {
-    success: true,
-    error: null,
-    message: 'Conta criada com sucesso! Analisaremos sua solicitação e você receberá um email de confirmação em breve.'
+    success: false,
+    error:
+      'O cadastro de contas ainda não está disponível. Nenhuma conta foi criada — use o formulário de sugestão de correção enquanto isso.',
+    message: null,
   };
 }

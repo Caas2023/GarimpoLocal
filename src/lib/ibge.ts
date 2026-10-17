@@ -8,7 +8,7 @@ export interface State {
 
 export interface City {
   id: number;
-  nome: string;      // slug-friendly (lowercase, sem acento)
+  nome: string; // slug-friendly (lowercase, sem acento)
   nomeExibicao: string; // nome formatado para exibição
   estado_id: number;
 }
@@ -56,18 +56,18 @@ const states: State[] = [
  */
 const cities: City[] = [
   // SP
-  { id: 3518800, nome: 'guarulhos',     nomeExibicao: 'Guarulhos',     estado_id: 35 },
-  { id: 3550308, nome: 'sao-paulo',     nomeExibicao: 'São Paulo',     estado_id: 35 },
-  { id: 3509502, nome: 'campinas',      nomeExibicao: 'Campinas',      estado_id: 35 },
+  { id: 3518800, nome: 'guarulhos', nomeExibicao: 'Guarulhos', estado_id: 35 },
+  { id: 3550308, nome: 'sao-paulo', nomeExibicao: 'São Paulo', estado_id: 35 },
+  { id: 3509502, nome: 'campinas', nomeExibicao: 'Campinas', estado_id: 35 },
   // RJ
   { id: 3304557, nome: 'rio-de-janeiro', nomeExibicao: 'Rio de Janeiro', estado_id: 33 },
-  { id: 3301009, nome: 'sao-goncalo',   nomeExibicao: 'São Gonçalo',   estado_id: 33 },
+  { id: 3301009, nome: 'sao-goncalo', nomeExibicao: 'São Gonçalo', estado_id: 33 },
   // SC
   { id: 4205407, nome: 'florianopolis', nomeExibicao: 'Florianópolis', estado_id: 42 },
   // MG
   { id: 3106200, nome: 'belo-horizonte', nomeExibicao: 'Belo Horizonte', estado_id: 31 },
   // DF
-  { id: 5300108, nome: 'brasilia',      nomeExibicao: 'Brasília',      estado_id: 53 },
+  { id: 5300108, nome: 'brasilia', nomeExibicao: 'Brasília', estado_id: 53 },
 ];
 
 /** Retorna todos os estados cadastrados. */
@@ -77,30 +77,38 @@ export const getStates = cache(async (): Promise<State[]> => {
 
 /** Retorna cidades ativas de um estado pela sigla UF (case-insensitive). */
 export const getCitiesByState = cache(async (estadoSigla: string): Promise<City[]> => {
-  const state = states.find(s => s.sigla.toUpperCase() === estadoSigla.toUpperCase());
+  const state = states.find((s) => s.sigla.toUpperCase() === estadoSigla.toUpperCase());
   if (!state) return [];
-  return cities.filter(c => c.estado_id === state.id);
+  return cities.filter((c) => c.estado_id === state.id);
 });
 
 /**
  * Valida se o par (UF, slug-cidade) é uma localidade cadastrada.
  * Usado nas rotas dinâmicas para retornar notFound() quando inválido.
  */
-export const validateLocation = cache(async (estadoSigla: string, cidadeSlug: string): Promise<boolean> => {
-  const state = states.find(s => s.sigla.toUpperCase() === estadoSigla.toUpperCase());
-  if (!state) return false;
-  return cities.some(c => c.estado_id === state.id && c.nome.toLowerCase() === cidadeSlug.toLowerCase());
-});
+export const validateLocation = cache(
+  async (estadoSigla: string, cidadeSlug: string): Promise<boolean> => {
+    const state = states.find((s) => s.sigla.toUpperCase() === estadoSigla.toUpperCase());
+    if (!state) return false;
+    return cities.some(
+      (c) => c.estado_id === state.id && c.nome.toLowerCase() === cidadeSlug.toLowerCase(),
+    );
+  },
+);
 
 /**
  * Retorna a cidade pelo par (UF, slug).
  * Retorna undefined se não encontrada.
  */
-export const getCityBySlug = cache(async (estadoSigla: string, cidadeSlug: string): Promise<City | undefined> => {
-  const state = states.find(s => s.sigla.toUpperCase() === estadoSigla.toUpperCase());
-  if (!state) return undefined;
-  return cities.find(c => c.estado_id === state.id && c.nome.toLowerCase() === cidadeSlug.toLowerCase());
-});
+export const getCityBySlug = cache(
+  async (estadoSigla: string, cidadeSlug: string): Promise<City | undefined> => {
+    const state = states.find((s) => s.sigla.toUpperCase() === estadoSigla.toUpperCase());
+    if (!state) return undefined;
+    return cities.find(
+      (c) => c.estado_id === state.id && c.nome.toLowerCase() === cidadeSlug.toLowerCase(),
+    );
+  },
+);
 
 /**
  * Retorna o nome de exibição da cidade pelo slug.
@@ -110,7 +118,7 @@ export function formatCidadeNome(slug: string, cidade?: City): string {
   if (cidade?.nomeExibicao) return cidade.nomeExibicao;
   return slug
     .split('-')
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ');
 }
 
@@ -122,7 +130,7 @@ export function toSlug(text: string): string {
   return text
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')  // remove diacritics
+    .replace(/[\u0300-\u036f]/g, '') // remove diacritics
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9-]/g, '')
     .replace(/-+/g, '-')

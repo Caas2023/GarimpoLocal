@@ -17,3 +17,21 @@ rad.json
 *.flf
 TestResults.xml
 
+# Next.js build output
+.next/
+next-env.d.ts
+out/
+build/
+*.tsbuildinfo
+
+# Test / coverage artifacts
+coverage/
+playwright-report/
+test-results/
+blob-report/
+.playwright/
+
+# Prettier cache
+.prettiercache
+.cache/
+

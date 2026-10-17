@@ -1,34 +1,46 @@
 'use server';
 
+import { z } from 'zod';
+
 export type LoginState = {
   success: boolean;
   error: string | null;
 };
 
-export async function submitLoginEmpresa(prevState: LoginState, formData: FormData): Promise<LoginState> {
-  const email = formData.get('email') as string;
-  const senha = formData.get('senha') as string;
+const emailSchema = z.email();
+
+/**
+ * Login de empresa.
+ *
+ * Não existe autenticação implementada (Fase 3 pendente): sem hashing, sem
+ * armazenamento de credenciais e sem sessão.
+ *
+ * A versão anterior aceitava um par de credenciais fixo no código-fonte
+ * (`teste@empresa.com` / `123456`) como atalho de login válido. Como o cadastro
+ * nunca gravava conta alguma, esse par era a **única** forma de entrar — uma
+ * credencial de backdoor effectively pública. Removido.
+ *
+ * Sem backend de autenticação, a action falha explicitamente.
+ */
+export async function submitLoginEmpresa(
+  _prevState: LoginState,
+  formData: FormData,
+): Promise<LoginState> {
+  const email = String(formData.get('email') ?? '')
+    .trim()
+    .toLowerCase();
+  const senha = String(formData.get('senha') ?? '');
 
   if (!email || !senha) {
-    return {
-      success: false,
-      error: 'Preencha o email e a senha.',
-    };
+    return { success: false, error: 'Preencha o e-mail e a senha.' };
   }
 
-  // Simulating Database Check (Vercel compatible persistence mock)
-  await new Promise(resolve => setTimeout(resolve, 600));
-
-  // Mocking invalid credentials for demonstration unless it's a test account
-  if (email === 'teste@empresa.com' && senha === '123456') {
-    return {
-      success: true,
-      error: null,
-    };
+  if (!emailSchema.safeParse(email).success) {
+    return { success: false, error: 'Informe um e-mail válido.' };
   }
 
   return {
     success: false,
-    error: 'E-mail ou senha incorretos.',
+    error: 'O acesso por senha ainda não está disponível. Nenhuma conta foi autenticada.',
   };
 }

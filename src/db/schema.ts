@@ -11,13 +11,17 @@ export const cities = pgTable('cities', {
 export const categories = pgTable('categories', {
   id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
   name: varchar('name', { length: 255 }).notNull(),
-  slug: varchar('slug', { length: 255 }).notNull().unique(), 
+  slug: varchar('slug', { length: 255 }).notNull().unique(),
 });
 
 export const companies = pgTable('companies', {
   id: text('id').primaryKey(), // UUID or string
-  cityId: integer('city_id').notNull().references(() => cities.id),
-  categoryId: integer('category_id').notNull().references(() => categories.id),
+  cityId: integer('city_id')
+    .notNull()
+    .references(() => cities.id),
+  categoryId: integer('category_id')
+    .notNull()
+    .references(() => categories.id),
   name: varchar('name', { length: 255 }).notNull(),
   slug: varchar('slug', { length: 255 }).notNull(),
   address: text('address'),
@@ -33,7 +37,9 @@ export const companies = pgTable('companies', {
 
 export const claims = pgTable('claims', {
   id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
-  companyId: text('company_id').notNull().references(() => companies.id),
+  companyId: text('company_id')
+    .notNull()
+    .references(() => companies.id),
   claimerEmail: varchar('claimer_email', { length: 255 }).notNull(),
   claimerName: varchar('claimer_name', { length: 255 }).notNull(),
   claimerPhone: varchar('claimer_phone', { length: 50 }),

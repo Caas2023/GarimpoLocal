@@ -21,7 +21,7 @@ describe('searchPlaces', () => {
 
     const mockFetch = jest.fn().mockResolvedValue({
       ok: true,
-      json: async () => ({ places: [{ id: 'place_1', displayName: { text: 'Empresa Teste' } }] })
+      json: async () => ({ places: [{ id: 'place_1', displayName: { text: 'Empresa Teste' } }] }),
     });
     global.fetch = mockFetch as unknown as typeof fetch;
 

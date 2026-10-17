@@ -48,14 +48,14 @@ describe('getStates', () => {
 
   it('contém SP e RJ', async () => {
     const states = await getStates();
-    const siglas = states.map(s => s.sigla);
+    const siglas = states.map((s) => s.sigla);
     expect(siglas).toContain('SP');
     expect(siglas).toContain('RJ');
   });
 
   it('não contém duplicatas por sigla', async () => {
     const states = await getStates();
-    const siglas = states.map(s => s.sigla);
+    const siglas = states.map((s) => s.sigla);
     const unique = new Set(siglas);
     expect(unique.size).toBe(siglas.length);
   });
@@ -72,7 +72,7 @@ describe('getCitiesByState', () => {
 
   it('Guarulhos está em SP com ID IBGE correto', async () => {
     const cities = await getCitiesByState('SP');
-    const gru = cities.find(c => c.nome === 'guarulhos');
+    const gru = cities.find((c) => c.nome === 'guarulhos');
     expect(gru).toBeDefined();
     expect(gru!.id).toBe(3518800);
   });

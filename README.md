@@ -27,6 +27,7 @@ Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 - [W3C WAI — Labeling Controls](https://www.w3.org/WAI/tutorials/forms/labels/): cada controle de busca/filtro tem `label` associado; rótulos visuais foram mantidos quando já faziam parte do fluxo.
 - [W3C WCAG 2.2 — Labels or Instructions](https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html): nomes acessíveis explícitos para busca, categoria e contato.
 - Direção visual: editorial urbano + mapa noturno, com azul-petróleo, laranja de ação e verde para dados abertos; a pesquisa permanece a ação dominante.
+
 ## Desenvolvimento local
 
 Servidor estático simples:
@@ -92,4 +93,3 @@ node scripts/generate-sitemap.js [--base-url https://seudominio.com.br]
 
 Em produção Vercel, `/sitemap.xml` é servido pelo handler `api/sitemap.js` com cache CDN de 1 hora.
 Resultado atual: **1.571 URLs** (homepage + 118 categorias + 1.452 empresas, rotas `/sp/guarulhos/categoria/empresa`).
-
