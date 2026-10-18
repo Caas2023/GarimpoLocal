@@ -100,17 +100,17 @@ test('company_store: saveCompany grava em Vercel KV usando pipeline sem expor to
   const commands = JSON.parse(capturedRequest.options.body);
   assert.equal(commands.length, 5);
   assert.equal(commands[0][0], 'SET');
-  assert.equal(commands[0][1], 'guarulhos-aberta:company:3518800:emp-99');
+  assert.equal(commands[0][1], 'garimpolocal:company:3518800:emp-99');
   assert.equal(commands[1][0], 'SET');
   assert.equal(
     commands[1][1],
-    'guarulhos-aberta:company_slug:3518800:logistica:transportes-rapido',
+    'garimpolocal:company_slug:3518800:logistica:transportes-rapido',
   );
   assert.equal(commands[2][0], 'SADD');
-  assert.equal(commands[2][1], 'guarulhos-aberta:companies:3518800');
+  assert.equal(commands[2][1], 'garimpolocal:companies:3518800');
   assert.equal(commands[3][0], 'SADD');
-  assert.equal(commands[3][1], 'guarulhos-aberta:companies_by_category:3518800:logistica');
-  assert.equal(commands[4][1], 'guarulhos-aberta:companies_by_neighbourhood:3518800:vila-galvao');
+  assert.equal(commands[3][1], 'garimpolocal:companies_by_category:3518800:logistica');
+  assert.equal(commands[4][1], 'garimpolocal:companies_by_neighbourhood:3518800:vila-galvao');
 });
 
 test('company_store: saveCompany com failClosed sem KV dispara erro classificado', async () => {

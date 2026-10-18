@@ -1,5 +1,5 @@
 /**
- * Camada de autenticação — Guarulhos Aberta
+ * Camada de autenticação — GarimpoLocal
  *
  * Responsabilidades:
  *   - Hash e verificação de senha via bcryptjs (custo 12)

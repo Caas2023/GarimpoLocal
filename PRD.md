@@ -1,4 +1,4 @@
-# PRD — Guarulhos Aberta
+# PRD — GarimpoLocal
 
 **Product Requirements Document · v1.0**  
 **Status:** aprovado como plano de execução  

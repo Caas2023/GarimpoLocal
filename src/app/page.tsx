@@ -4,12 +4,12 @@ import { getCategorySummary, getCompaniesByCategory } from '@/lib/catalog';
 import { buildCanonicalUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Guarulhos Aberta — Diretório Empresarial',
+  title: 'GarimpoLocal — Diretório Empresarial',
   description:
     'Diretório de empresas de Guarulhos com dados verificáveis do OpenStreetMap. Arquitetura pronta para as 5.570 cidades brasileiras.',
   alternates: { canonical: buildCanonicalUrl('/') },
   openGraph: {
-    title: 'Guarulhos Aberta — Diretório Empresarial',
+    title: 'GarimpoLocal — Diretório Empresarial',
     description:
       'Empresas de Guarulhos com fonte, licença e mecanismo de correção. Piloto de diretório nacional.',
     type: 'website',
@@ -56,7 +56,7 @@ export default function Home() {
       {/* Hero */}
       <header className="w-full bg-[#005f73] text-white px-6 py-16 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
-          Guarulhos Aberta
+          GarimpoLocal
         </h1>
         <p className="text-lg md:text-xl text-cyan-100 max-w-2xl mx-auto mb-6">
           Diretório empresarial de Guarulhos com fonte verificável.

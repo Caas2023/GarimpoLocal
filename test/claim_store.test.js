@@ -20,8 +20,8 @@ test('claim_store - grava JSON no endpoint REST KV sem expor token no payload', 
     },
   );
 
-  assert.deepEqual(result, { key: 'guarulhos-aberta:claim:claim-test', provider: 'vercel-kv' });
-  assert.equal(request.url, 'https://kv.example.com/set/guarulhos-aberta%3Aclaim%3Aclaim-test');
+  assert.deepEqual(result, { key: 'garimpolocal:claim:claim-test', provider: 'vercel-kv' });
+  assert.equal(request.url, 'https://kv.example.com/set/garimpolocal%3Aclaim%3Aclaim-test');
   assert.equal(request.options.headers.Authorization, 'Bearer secret-token');
   assert.equal(
     request.options.body,

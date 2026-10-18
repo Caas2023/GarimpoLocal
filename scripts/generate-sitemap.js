@@ -26,7 +26,7 @@ function parseBaseUrl() {
     return process.argv[idx + 1].replace(/\/$/, '');
   }
   // Fallback para variável de ambiente ou URL de produção padrão
-  return process.env.SITE_BASE_URL || 'https://guarulhos-aberta.vercel.app';
+  return process.env.SITE_BASE_URL || 'https://garimpolocal.vercel.app';
 }
 
 function main() {

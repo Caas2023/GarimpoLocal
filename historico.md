@@ -1,6 +1,6 @@
 # Histórico de Melhorias
 
-Registro cronológico das auditorias e correções aplicadas ao **Guarulhos Aberta**.
+Registro cronológico das auditorias e correções aplicadas ao **GarimpoLocal**.
 
 Formato: seções por sessão, com o estado verificado antes/depois e as pendências
 que permanecem abertas. Números de cobertura e contagem de testes são medidos,
@@ -88,7 +88,7 @@ valor de `tipo` (`correcao_dados`) que nem existia no formulário
 - `page.tsx` derivava o nome da empresa do slug
   (`pizzaria-sabor-paulista` → `pizzaria sabor paulista`), ou seja, um palpite.
   Para um fluxo de verificação de propriedade, nome inventado é inutilizável.
-- `generateMetadata` fixava "Guarulhos Aberta" no título, contradizendo a
+- `generateMetadata` fixava "GarimpoLocal" no título, contradizendo a
   proposta de escala nacional.
 - Só validava `estado.length !== 2`; `/sp/naoexiste/x/y/correcao` renderizava
   em vez de retornar 404.
@@ -180,7 +180,7 @@ CNPJ (`'abc'` passava) e reportava "Conta criada com sucesso!" sem criar nada.
   nunca conseguiria autenticar ninguém.
 - `/login` e `/empresas/cadastro` agora exibem aviso honesto e **apontam para o
   caminho que funciona**: a reivindicação de página de qualquer empresa.
-- Metadados dessas rotas deixaram de fixar "Diretório Guarulhos Aberta" e passam
+- Metadados dessas rotas deixaram de fixar "Diretório GarimpoLocal" e passam
   a derivar o nome da cidade — correção da mesma falha de escala nacional tratada
   na rota `correcao`.
 

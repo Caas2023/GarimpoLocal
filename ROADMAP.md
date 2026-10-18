@@ -1,10 +1,10 @@
-# Roadmap — Guarulhos Aberta
+# Roadmap — GarimpoLocal
 
 Atualizado em 18/10/2026.
 
 ## Nome e posicionamento
 
-- Nome de trabalho: **Guarulhos Aberta**.
+- Nome de trabalho: **GarimpoLocal**.
 - Busca pública não encontrou portal empresarial com expressão exata.
 - Concorrentes encontrados: Tudo Aqui Guarulhos, guia.gru.br, Guia Guarulhos e Guarulhos em Rede.
 - Nome continua provisório até pesquisa de marca no INPI e consulta direta de domínio no Registro.br.
@@ -46,7 +46,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - Rotas: `/estado/cidade/categoria/empresa`.
 - Localidade identificada por código IBGE, UF, município e slug.
 - Banco, SEO, sitemap, cadastro e reivindicação não podem codificar Guarulhos como constante global.
-- Nome nacional ainda precisa validação no INPI e Registro.br. “Guarulhos Aberta” permanece nome da implantação piloto.
+- Nome nacional ainda precisa validação no INPI e Registro.br. “GarimpoLocal” permanece nome da implantação piloto.
 
 ## Fases
 
@@ -124,7 +124,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 
 ## Automação
 
-Cronjob: `Guarulhos Aberta — evolução do portal`  
+Cronjob: `GarimpoLocal — evolução do portal`  
 Job ID: `9ce137ee39af`  
 Periodicidade: uma tarefa verificável a cada 5 horas.
 

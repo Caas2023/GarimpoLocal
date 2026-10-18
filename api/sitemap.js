@@ -41,7 +41,7 @@ module.exports = function handler(req, res) {
       process.env.SITE_BASE_URL ||
       (req.headers && req.headers.host
         ? `https://${req.headers.host}`
-        : 'https://guarulhos-aberta.vercel.app');
+        : 'https://garimpolocal.vercel.app');
 
     const { companies, localities } = loadData();
     const { xml } = generateSitemap({ baseUrl, companies, localities });

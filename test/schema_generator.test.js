@@ -35,7 +35,7 @@ test('gera Schema JSON-LD LocalBusiness correto e dinâmico por localidade', () 
   assert.equal(schema['@type'], 'LocalBusiness');
   assert.equal(
     schema['@id'],
-    'https://guarulhos-aberta.vercel.app/sp/guarulhos/oticas/oticas-dyana',
+    'https://garimpolocal.vercel.app/sp/guarulhos/oticas/oticas-dyana',
   );
   assert.equal(schema.name, 'Óticas Dyana');
   assert.equal(schema.address['@type'], 'PostalAddress');
@@ -64,20 +64,20 @@ test('gera Schema BreadcrumbList com hierarquia nacional', () => {
     '@type': 'ListItem',
     position: 1,
     name: 'Início',
-    item: 'https://guarulhos-aberta.vercel.app',
+    item: 'https://garimpolocal.vercel.app',
   });
 
   assert.deepEqual(breadcrumb.itemListElement[1], {
     '@type': 'ListItem',
     position: 2,
     name: 'Guarulhos (SP)',
-    item: 'https://guarulhos-aberta.vercel.app/sp/guarulhos',
+    item: 'https://garimpolocal.vercel.app/sp/guarulhos',
   });
 
   assert.deepEqual(breadcrumb.itemListElement[3], {
     '@type': 'ListItem',
     position: 4,
     name: 'Óticas Dyana',
-    item: 'https://guarulhos-aberta.vercel.app/sp/guarulhos/oticas/oticas-dyana',
+    item: 'https://garimpolocal.vercel.app/sp/guarulhos/oticas/oticas-dyana',
   });
 });

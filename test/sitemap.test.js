@@ -140,7 +140,7 @@ describe('generateSitemap — validação de entradas', () => {
 });
 
 describe('generateSitemap — geração nacional com rotas IBGE', () => {
-  const BASE = 'https://guarulhos-aberta.vercel.app';
+  const BASE = 'https://garimpolocal.vercel.app';
   const companies = [COMPANY_A, COMPANY_B, COMPANY_SP, COMPANY_UNKNOWN, COMPANY_BAD_SLUG];
   const localities = [LOCALITY_GUARULHOS, LOCALITY_SP_CAPITAL];
 
@@ -282,7 +282,7 @@ describe('generateSitemap — integração com dados reais', () => {
     const realCompanies = require('../data/companies.json');
     const realLocalities = require('../data/localities.json');
     const { xml, stats } = generateSitemap({
-      baseUrl: 'https://guarulhos-aberta.vercel.app',
+      baseUrl: 'https://garimpolocal.vercel.app',
       companies: realCompanies,
       localities: realLocalities,
       lastmod: '2026-10-01',

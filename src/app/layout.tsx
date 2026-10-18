@@ -14,18 +14,18 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Guarulhos Aberta',
-    default: 'Guarulhos Aberta - Diretório Nacional de Empresas',
+    template: '%s | GarimpoLocal',
+    default: 'GarimpoLocal - Diretório Nacional de Empresas',
   },
   description: 'Diretório local confiável, rápido e útil para moradores e empresas do Brasil.',
   keywords: ['diretório de empresas', 'busca local', 'guarulhos', 'empresas locais'],
   openGraph: {
-    title: 'Guarulhos Aberta - Diretório Nacional de Empresas',
+    title: 'GarimpoLocal - Diretório Nacional de Empresas',
     description:
       'Encontre as melhores empresas na sua cidade ou bairro de forma rápida e confiável.',
     type: 'website',
     locale: 'pt_BR',
-    siteName: 'Guarulhos Aberta',
+    siteName: 'GarimpoLocal',
   },
 };
 

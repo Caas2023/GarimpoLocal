@@ -1,4 +1,4 @@
-# Guarulhos Aberta
+# GarimpoLocal
 
 Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 
@@ -74,7 +74,7 @@ Não raspar Google Maps. Dados Google só entram via API oficial autorizada. Fal
 
 ## Marca piloto
 
-- Nome: Guarulhos Aberta
+- Nome: GarimpoLocal
 - Fundo: marfim `#f7f4ed` na proposta original
 - Implementação atual: interface escura com roxo para melhor leitura de cards
 

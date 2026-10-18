@@ -1,4 +1,4 @@
-const DEFAULT_SITE_URL = 'https://guarulhos-aberta.vercel.app';
+const DEFAULT_SITE_URL = 'https://garimpolocal.vercel.app';
 
 /**
  * Builds canonical URLs from the national route contract.
