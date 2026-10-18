@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getCityBySlug, formatCidadeNome } from '@/lib/ibge';
 import { getCompaniesByCategory } from '@/lib/catalog';
+import { buildCanonicalUrl, buildLocalityPath } from '@/lib/seo';
 
 interface CategoriaProps {
   params: Promise<{ estado: string; cidade: string; categoria: string }>;
@@ -15,9 +16,18 @@ export async function generateMetadata({ params }: CategoriaProps): Promise<Meta
   const city = await getCityBySlug(estado, cidade);
   const cityName = formatCidadeNome(cidade, city);
   const categoryName = categoria.replace(/-/g, ' ');
+  const canonicalPath = `${buildLocalityPath(estado, cidade)}/${categoria}`;
   return {
     title: `${categoryName} em ${cityName}`,
     description: `Empresas de ${categoryName} em ${cityName}, ${estado.toUpperCase()}, com fonte e cobertura informadas.`,
+    alternates: { canonical: buildCanonicalUrl(canonicalPath) },
+    openGraph: {
+      title: `${categoryName} em ${cityName}`,
+      description: `Empresas mapeadas de ${categoryName} em ${cityName}, com fonte e cobertura informadas.`,
+      url: buildCanonicalUrl(canonicalPath),
+      type: 'website',
+      locale: 'pt_BR',
+    },
   };
 }
 

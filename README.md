@@ -39,7 +39,7 @@ python -m http.server 4173
 
 Acesse `http://localhost:4173`.
 
-- As páginas Next.js de cidade e categoria agora consomem registros reais do catálogo OSM por código IBGE; páginas sem dados retornam 404 em vez de criar exemplos.
+- Metadados SEO de localidade, categoria e empresa agora geram canonical e Open Graph por rota nacional; o host aceita `NEXT_PUBLIC_SITE_URL` e mantém fallback explícito do piloto.
 - O sitemap Next.js gera URLs de localidades e categorias a partir dos catálogos configuráveis, sem codificar Guarulhos.
 
 ## Testes

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getCityBySlug, formatCidadeNome } from '@/lib/ibge';
 import { findCompany } from '@/lib/catalog';
+import { buildCanonicalUrl, buildLocalityPath } from '@/lib/seo';
 import {
   getBadgeInfo,
   getProvenanceInfo,
@@ -27,9 +28,18 @@ export async function generateMetadata({ params }: LocalidadeProps): Promise<Met
   const company = city ? findCompany(String(city.id), categoria, empresa) : undefined;
   if (!company) return { title: 'Empresa não encontrada' };
   const cityName = formatCidadeNome(cidade, city);
+  const canonicalPath = `${buildLocalityPath(estado, cidade)}/${categoria}/${empresa}`;
   return {
     title: `${company.name} em ${cityName}`,
     description: `${company.name}: informações verificáveis, contato e fonte do cadastro em ${cityName}.`,
+    alternates: { canonical: buildCanonicalUrl(canonicalPath) },
+    openGraph: {
+      title: `${company.name} em ${cityName}`,
+      description: `Informações verificáveis e fonte do cadastro de ${company.name}.`,
+      url: buildCanonicalUrl(canonicalPath),
+      type: 'website',
+      locale: 'pt_BR',
+    },
   };
 }
 

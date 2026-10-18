@@ -12,6 +12,7 @@ Atualizado em 17/10/2026.
 
 ## Próxima tarefa recomendada
 
+- [x] Metadados SEO nacionais com canonical/Open Graph em localidade, categoria e empresa; host configurável por `NEXT_PUBLIC_SITE_URL`.
 - [ ] Publicação GitHub e deploy Vercel verificado com URL de produção.
 - [ ] Página individual conectada ao catálogo real com Schema `LocalBusiness` condicionado a dados verificáveis.
 - [ ] Atualização periódica da base (sincronização OSM agendada).

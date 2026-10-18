@@ -2,9 +2,31 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCityBySlug, formatCidadeNome } from '@/lib/ibge';
 import { getCategorySummary } from '@/lib/catalog';
+import type { Metadata } from 'next';
+import { buildCanonicalUrl, buildLocalityPath } from '@/lib/seo';
 
 interface CidadeProps {
   params: Promise<{ estado: string; cidade: string }>;
+}
+
+export async function generateMetadata({ params }: CidadeProps): Promise<Metadata> {
+  const { estado, cidade } = await params;
+  const city = await getCityBySlug(estado, cidade);
+  if (!city) return { title: 'Localidade não encontrada' };
+  const cityName = formatCidadeNome(cidade, city);
+  const canonicalPath = buildLocalityPath(estado, cidade);
+  return {
+    title: `Empresas em ${cityName}`,
+    description: `Explore empresas mapeadas em ${cityName}, ${estado.toUpperCase()}, com fonte e cobertura informadas.`,
+    alternates: { canonical: buildCanonicalUrl(canonicalPath) },
+    openGraph: {
+      title: `Empresas em ${cityName}`,
+      description: `Diretório empresarial de ${cityName} com fonte e cobertura informadas.`,
+      url: buildCanonicalUrl(canonicalPath),
+      type: 'website',
+      locale: 'pt_BR',
+    },
+  };
 }
 
 export const instant = false;
