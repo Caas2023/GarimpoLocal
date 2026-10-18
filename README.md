@@ -5,6 +5,7 @@ Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 ## Estado atual
 
 - Interface responsiva com busca, filtros por categoria e cards de empresas.
+- **Homepage dinâmica**: categorias e empresas reais do catálogo OSM (1.502 registros); removidos links demo hardcoded; `generateMetadata` com canonical e Open Graph nacionais.
 - Base real: 1.502 registros do município de Guarulhos obtidos de OpenStreetMap/Overpass.
 - Contatos encontrados: 379 telefones, 377 links WhatsApp, 155 sites e 1.061 endereços.
 - Cards mostram telefone, WhatsApp, site e mapa quando o dado existe na fonte.

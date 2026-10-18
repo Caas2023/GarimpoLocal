@@ -1,6 +1,6 @@
 # Roadmap — Guarulhos Aberta
 
-Atualizado em 17/10/2026.
+Atualizado em 18/10/2026.
 
 ## Nome e posicionamento
 
@@ -13,8 +13,8 @@ Atualizado em 17/10/2026.
 ## Próxima tarefa recomendada
 
 - [x] Metadados SEO nacionais com canonical/Open Graph em localidade, categoria e empresa; host configurável por `NEXT_PUBLIC_SITE_URL`.
+- [x] Homepage dinâmica com categorias e empresas reais do catálogo OSM; removidos links demo hardcoded; SEO via `generateMetadata`; arquitetura nacional explicitada na própria UI; 182 testes passando.
 - [ ] Publicação GitHub e deploy Vercel verificado com URL de produção.
-- [ ] Página individual conectada ao catálogo real com Schema `LocalBusiness` condicionado a dados verificáveis.
 - [ ] Atualização periódica da base (sincronização OSM agendada).
 - [x] Categorias e bairros canônicos (normalização e mapeamento de bairros/distritos por código IBGE para filtros avançados de busca).
 - [x] Importador e sincronizador de dados OSM com paginação, deduplicação e carga em lote no catálogo persistente (`lib/osm_importer.js`, `scripts/sync_osm_companies.js`, `api/places.js` nacional com suporte a `company_store`).
