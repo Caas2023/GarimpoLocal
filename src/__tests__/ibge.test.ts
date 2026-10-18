@@ -21,6 +21,7 @@ import {
   getCityBySlug,
   formatCidadeNome,
   toSlug,
+  getCatalogMeta,
 } from '../lib/ibge';
 
 // ---------------------------------------------------------------------------
@@ -226,5 +227,64 @@ describe('toSlug', () => {
   it('garante slug válido para rota URL', () => {
     const slug = toSlug('Mogi das Cruzes');
     expect(slug).toMatch(/^[a-z0-9-]+$/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Catálogo nacional completo (municipalities.json gerado via IBGE API)
+// ---------------------------------------------------------------------------
+describe('catálogo nacional IBGE', () => {
+  it('cobre todos os 27 estados', async () => {
+    const states = await getStates();
+    expect(states.length).toBe(27);
+  });
+
+  it('catálogo tem mais de 5.000 municípios', async () => {
+    const meta = getCatalogMeta();
+    expect(meta.total).toBeGreaterThanOrEqual(5000);
+  });
+
+  it('metadados referenciam a API IBGE como fonte', () => {
+    const meta = getCatalogMeta();
+    expect(meta.fonte).toContain('servicodados.ibge.gov.br');
+  });
+
+  it('SP tem mais de 600 municípios', async () => {
+    const cities = await getCitiesByState('SP');
+    expect(cities.length).toBeGreaterThan(600);
+  });
+
+  it('MT contém Boa Esperança do Norte (edge case microrregiao null)', async () => {
+    const cities = await getCitiesByState('MT');
+    const found = cities.find((c) => c.nome === 'boa-esperanca-do-norte');
+    expect(found).toBeDefined();
+  });
+
+  it('valida municípios além do piloto inicial (florianopolis, belo-horizonte, brasilia)', async () => {
+    expect(await validateLocation('SC', 'florianopolis')).toBe(true);
+    expect(await validateLocation('MG', 'belo-horizonte')).toBe(true);
+    expect(await validateLocation('DF', 'brasilia')).toBe(true);
+  });
+
+  it('todos os municípios de RJ têm estado_id 33', async () => {
+    const cities = await getCitiesByState('RJ');
+    for (const c of cities) {
+      expect(c.estado_id).toBe(33);
+    }
+  });
+
+  it('nenhum município tem nome vazio', async () => {
+    // Verificar SP como amostra representativa
+    const cities = await getCitiesByState('SP');
+    for (const c of cities) {
+      expect(c.nome.length).toBeGreaterThan(0);
+      expect(c.nomeExibicao.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('getCityBySlug encontra mogi-das-cruzes em SP', async () => {
+    const city = await getCityBySlug('SP', 'mogi-das-cruzes');
+    expect(city).toBeDefined();
+    expect(city!.nomeExibicao).toBe('Mogi das Cruzes');
   });
 });

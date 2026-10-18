@@ -1,4 +1,8 @@
 import { cache } from 'react';
+// municipalities.json é gerado por scripts/fetch-ibge-municipalities.js
+// e contém os 5.571 municípios brasileiros (fonte: IBGE API pública).
+// Para atualizar o catálogo: node scripts/fetch-ibge-municipalities.js
+import municipalitiesData from './data/municipalities.json';
 
 export interface State {
   id: number;
@@ -8,15 +12,28 @@ export interface State {
 
 export interface City {
   id: number;
-  nome: string; // slug-friendly (lowercase, sem acento)
-  nomeExibicao: string; // nome formatado para exibição
+  nome: string;        // slug-friendly (lowercase, sem acento) para uso em rotas
+  nomeExibicao: string; // nome formatado para exibição ao usuário
   estado_id: number;
 }
 
+/** Interface interna do JSON gerado pelo script IBGE. */
+interface RawMunicipality {
+  id: number;
+  nome: string;
+  nomeExibicao: string;
+  estado_id: number;
+  estado_sigla: string;
+}
+
+interface MunicipalitiesFile {
+  _meta: { fonte: string; data_carga: string; total: number; licenca: string };
+  municipios: RawMunicipality[];
+}
+
 /**
- * Mock de estados para desenvolvimento/piloto.
- * Em produção, substituir por requisição à API IBGE ou tabela de banco.
- * IDs IBGE oficiais: https://servicodados.ibge.gov.br/api/v1/localidades/estados
+ * Lista de estados brasileiros com IDs IBGE oficiais.
+ * Fonte: https://servicodados.ibge.gov.br/api/v1/localidades/estados
  */
 const states: State[] = [
   { id: 11, sigla: 'RO', nome: 'Rondônia' },
@@ -49,48 +66,39 @@ const states: State[] = [
 ];
 
 /**
- * Cidades ativas no piloto.
- * nome: slug usado na rota (lowercase, normalizado).
- * nomeExibicao: nome para o usuário.
- * ID IBGE oficial.
+ * Catálogo completo de municípios brasileiros carregado do JSON gerado
+ * em build-time. Suporta as ~5.571 cidades sem reescrita estrutural.
  */
-const cities: City[] = [
-  // SP
-  { id: 3518800, nome: 'guarulhos', nomeExibicao: 'Guarulhos', estado_id: 35 },
-  { id: 3550308, nome: 'sao-paulo', nomeExibicao: 'São Paulo', estado_id: 35 },
-  { id: 3509502, nome: 'campinas', nomeExibicao: 'Campinas', estado_id: 35 },
-  // RJ
-  { id: 3304557, nome: 'rio-de-janeiro', nomeExibicao: 'Rio de Janeiro', estado_id: 33 },
-  { id: 3301009, nome: 'sao-goncalo', nomeExibicao: 'São Gonçalo', estado_id: 33 },
-  // SC
-  { id: 4205407, nome: 'florianopolis', nomeExibicao: 'Florianópolis', estado_id: 42 },
-  // MG
-  { id: 3106200, nome: 'belo-horizonte', nomeExibicao: 'Belo Horizonte', estado_id: 31 },
-  // DF
-  { id: 5300108, nome: 'brasilia', nomeExibicao: 'Brasília', estado_id: 53 },
-];
+const allCities: City[] = (municipalitiesData as MunicipalitiesFile).municipios.map(
+  (m: RawMunicipality): City => ({
+    id:           m.id,
+    nome:         m.nome,
+    nomeExibicao: m.nomeExibicao,
+    estado_id:    m.estado_id,
+  }),
+);
 
-/** Retorna todos os estados cadastrados. */
+/** Retorna todos os estados brasileiros. */
 export const getStates = cache(async (): Promise<State[]> => {
   return states;
 });
 
-/** Retorna cidades ativas de um estado pela sigla UF (case-insensitive). */
+/** Retorna todas as cidades de um estado pela sigla UF (case-insensitive). */
 export const getCitiesByState = cache(async (estadoSigla: string): Promise<City[]> => {
   const state = states.find((s) => s.sigla.toUpperCase() === estadoSigla.toUpperCase());
   if (!state) return [];
-  return cities.filter((c) => c.estado_id === state.id);
+  return allCities.filter((c) => c.estado_id === state.id);
 });
 
 /**
- * Valida se o par (UF, slug-cidade) é uma localidade cadastrada.
+ * Valida se o par (UF, slug-cidade) é uma localidade cadastrada no catálogo IBGE.
  * Usado nas rotas dinâmicas para retornar notFound() quando inválido.
  */
 export const validateLocation = cache(
   async (estadoSigla: string, cidadeSlug: string): Promise<boolean> => {
     const state = states.find((s) => s.sigla.toUpperCase() === estadoSigla.toUpperCase());
     if (!state) return false;
-    return cities.some(
+    return allCities.some(
       (c) => c.estado_id === state.id && c.nome.toLowerCase() === cidadeSlug.toLowerCase(),
     );
   },
@@ -104,7 +112,7 @@ export const getCityBySlug = cache(
   async (estadoSigla: string, cidadeSlug: string): Promise<City | undefined> => {
     const state = states.find((s) => s.sigla.toUpperCase() === estadoSigla.toUpperCase());
     if (!state) return undefined;
-    return cities.find(
+    return allCities.find(
       (c) => c.estado_id === state.id && c.nome.toLowerCase() === cidadeSlug.toLowerCase(),
     );
   },
@@ -135,4 +143,12 @@ export function toSlug(text: string): string {
     .replace(/[^a-z0-9-]/g, '')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
+}
+
+/**
+ * Retorna metadados do catálogo (fonte, data de carga, total de municípios).
+ * Útil para exibição de proveniência e conformidade.
+ */
+export function getCatalogMeta() {
+  return (municipalitiesData as MunicipalitiesFile)._meta;
 }

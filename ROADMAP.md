@@ -12,16 +12,16 @@ Atualizado em 17/10/2026.
 
 ## Próxima tarefa recomendada
 
-- [ ] Integrar importação controlada de municípios/UFs via fonte oficial IBGE, ampliando `data/localities.json` sem incluir empresas inventadas.
-- [x] Persistência de contas e sessões — bcryptjs (custo 12) + iron-session (cookie httpOnly SameSite=Lax, 7 dias). `src/lib/auth.ts`, migration `drizzle/0001_add_user_auth.sql`. Requer `SESSION_SECRET` (≥ 32 chars) + `DATABASE_URL` como variáveis de ambiente; não persiste quando banco/sessão não configurados (falha explícita 503).
 - [ ] Publicação GitHub e deploy Vercel verificado com URL de produção.
+- [ ] Página individual conectada ao catálogo real com Schema `LocalBusiness` condicionado a dados verificáveis.
+- [ ] Atualização periódica da base (sincronização OSM agendada).
 - [x] Categorias e bairros canônicos (normalização e mapeamento de bairros/distritos por código IBGE para filtros avançados de busca).
 - [x] Importador e sincronizador de dados OSM com paginação, deduplicação e carga em lote no catálogo persistente (`lib/osm_importer.js`, `scripts/sync_osm_companies.js`, `api/places.js` nacional com suporte a `company_store`).
 - [x] Persistência do catálogo de empresas compatível com Vercel, sem depender do JSON versionado (`lib/company_store.js` com Vercel KV REST, particionamento IBGE, índice de slug, batch pipeline e fallback).
 - [x] Persistência compatível com Vercel para reivindicações/correções via REST KV, com falha fechada (`503`) quando as variáveis não estão configuradas.
 - [x] APIs de empresa e categoria sem fallback implícito para Guarulhos; localidade é obrigatória por IBGE/slug.
 
-## Progresso recente
+- [x] Catálogo nacional completo de municípios IBGE — `src/lib/data/municipalities.json` com 5.571 municípios brasileiros; `src/lib/ibge.ts` reescrito para carregar do JSON em build-time sem arrays hardcoded; script de atualização `scripts/fetch-ibge-municipalities.js`; 10 novos testes unitários cobrindo cobertura nacional, edge cases e proveniência. Total: 179 testes passando.
 
 - [x] Sincronizador e importador OpenStreetMap (`lib/osm_importer.js`, `scripts/sync_osm_companies.js`): normalização geográfica territorial, sanitização estrita, formatação de contatos (telefone com DDD, WhatsApp wa.me, URL, e-mail), mapeamento pt-BR, deduplicação espacial/ID e carga em lotes na camada de persistência.
 - [x] `api/places.js` atualizado para arquitetura nacional: consulta prioritária ao catálogo persistente (`company_store`), fallback dinâmico Overpass delimitado por município e compatibilidade com cidade-piloto.

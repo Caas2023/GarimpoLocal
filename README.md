@@ -77,10 +77,25 @@ Não raspar Google Maps. Dados Google só entram via API oficial autorizada. Fal
 - Fundo: marfim `#f7f4ed` na proposta original
 - Implementação atual: interface escura com roxo para melhor leitura de cards
 
+## Catálogo nacional de municípios
+
+O arquivo `src/lib/data/municipalities.json` contém os **5.571 municípios
+brasileiros** obtidos da API pública do IBGE (dados públicos, sem restrição de
+uso declarada). Para atualizar o catálogo:
+
+```bash
+node scripts/fetch-ibge-municipalities.js
+```
+
+As funções `getCitiesByState`, `validateLocation` e `getCityBySlug` em
+`src/lib/ibge.ts` consomem esse catálogo em build-time, sem codificar nenhuma
+cidade específica no modelo de dados. `getCatalogMeta()` expõe fonte, data de
+carga e total para transparência.
+
 ## Pendências
 
 - Deploy Vercel (CLI deslogada; autenticar com `vercel login`).
-- Expansão para outras cidades brasileiras.
+- Expansão para outras cidades brasileiras (catálogo IBGE completo já disponível).
 - Cadastro/reivindicação de empresas.
 - Atualização periódica da base.
 
