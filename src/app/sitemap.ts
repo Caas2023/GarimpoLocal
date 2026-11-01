@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getStates, getCitiesByState } from '@/lib/ibge';
 import { getCategorySummary } from '@/lib/catalog';
 
-const baseUrl = 'https://guarulhosaberta.com.br';
+const baseUrl = 'https://garimpolocal.netlify.app';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const states = await getStates();

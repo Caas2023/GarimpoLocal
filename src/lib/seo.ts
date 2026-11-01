@@ -1,4 +1,4 @@
-const DEFAULT_SITE_URL = 'https://garimpolocal.vercel.app';
+const DEFAULT_SITE_URL = 'https://garimpolocal.netlify.app';
 
 /**
  * Builds canonical URLs from the national route contract.

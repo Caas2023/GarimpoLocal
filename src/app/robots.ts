@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://guarulhosaberta.com.br/sitemap.xml',
+    sitemap: 'https://garimpolocal.netlify.app/sitemap.xml',
   };
 }
