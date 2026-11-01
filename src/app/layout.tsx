@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   },
   description: 'Diretório local confiável, rápido e útil para moradores e empresas do Brasil.',
   keywords: ['diretório de empresas', 'busca local', 'guarulhos', 'empresas locais'],
+  verification: {
+    google: '25aGJjdhSOk9Zf11P0ESXhbSUkihnwKovLwCWDa4gK4',
+  },
   openGraph: {
     title: 'GarimpoLocal - Diretório Nacional de Empresas',
     description:
